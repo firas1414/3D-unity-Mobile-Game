@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 7034017440433122579}
   - component: {fileID: 2350728133641859513}
   - component: {fileID: 1489252409350077335}
-  - component: {fileID: -8798800663760094698}
+  - component: {fileID: 8522911156253161303}
   m_Layer: 5
   m_Name: JoyStick
   m_TagString: Untagged
@@ -198,7 +198,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &-8798800663760094698
+--- !u!114 &8522911156253161303
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -210,6 +210,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8595ffca16c1b2f4f83db9cfdcddfa2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThumbStickTrans: {fileID: 5928404563248576048}
+  BackgroundTrans: {fileID: 472801265153157368}
+  CenterTrans: {fileID: 2324524402895922234}
 --- !u!1 &7224707980448550610
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,13 +238,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7224707980448550610}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0.006967236, y: -0.0069534164, z: -0.00070707797, w: 0.99995136}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2324524402895922234}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -0.799, y: -0.796, z: -0.075}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
