@@ -6,6 +6,10 @@ using UnityEngine.EventSystems;
 public class JoyStick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
     public delegate void OnStickInputValueUpdated(Vector2  inputVal);
+/*
+It's saying, "Hey, when someone updates the joystick, this is the format (delegate)(A contract) they need to follow. They should give me a Vector2 value."
+So, every time the joystick is moved, it follows this format (delegate) and gives back a Vector2 value, which represents the direction the joystick was moved in.
+*/
     public event OnStickInputValueUpdated OnStickValueUpdated;
     [SerializeField] RectTransform ThumbStickTrans;
     [SerializeField] RectTransform BackgroundTrans;
@@ -19,7 +23,7 @@ public void OnDrag(PointerEventData eventData)
     Vector2 localOffset = Vector2.ClampMagnitude(TouchPos - centerPos,BackgroundTrans.sizeDelta.x/4);
     Vector2 inputVal = localOffset / BackgroundTrans.sizeDelta.x/4;
     ThumbStickTrans.position = centerPos + localOffset;
-    OnStickValueUpdated?.Invoke(inputVal);
+    OnStickValueUpdated?.Invoke(inputVal); //Trigger the event and passing inputVal as the argument
 
 }
 
@@ -34,7 +38,7 @@ public void OnDrag(PointerEventData eventData)
     {
         BackgroundTrans.position = CenterTrans.position;
         ThumbStickTrans.position = BackgroundTrans.position;
-        OnStickValueUpdated?.Invoke(Vector2.zero);
+        OnStickValueUpdated?.Invoke(Vector2.zero); //Trigger the event and passing inputVal as the argument
     }
 
     void Start()
