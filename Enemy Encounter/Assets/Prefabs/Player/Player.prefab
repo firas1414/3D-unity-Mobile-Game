@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveStick: {fileID: 0}
   characterController: {fileID: 665115736756057651}
-  moveSpeed: 20
+  moveSpeed: 40
 --- !u!143 &665115736756057651
 CharacterController:
   m_ObjectHideFlags: 0

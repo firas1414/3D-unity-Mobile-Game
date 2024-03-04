@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] JoyStick moveStick;
     [SerializeField] CharacterController characterController;
-    [SerializeField] float moveSpeed = 20f;
+    [SerializeField] float moveSpeed = 60f;
     Vector2 moveInput;
     // Start is called before the first frame update
     void Start()
