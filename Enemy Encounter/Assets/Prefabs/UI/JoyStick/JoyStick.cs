@@ -20,8 +20,8 @@ public void OnDrag(PointerEventData eventData)
     Debug.Log($"On Drag Fired {eventData.position}");
     Vector2 TouchPos = eventData.position;
     Vector2 centerPos = BackgroundTrans.position;
-    Vector2 localOffset = Vector2.ClampMagnitude(TouchPos - centerPos,BackgroundTrans.sizeDelta.x/4);
-    Vector2 inputVal = localOffset / BackgroundTrans.sizeDelta.x/4;
+    Vector2 localOffset = Vector2.ClampMagnitude(TouchPos - centerPos,BackgroundTrans.sizeDelta.x/2);
+    Vector2 inputVal = localOffset / BackgroundTrans.sizeDelta.x/2;
     ThumbStickTrans.position = centerPos + localOffset;
     OnStickValueUpdated?.Invoke(inputVal); //Trigger the event and passing inputVal as the argument
 
