@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-     moveStick.OnStickValueUpdated += moveStickmoveStick; 
+     moveStick.OnStickValueUpdated += moveStickmoveStick; //subscribe the moveStickmoveStick function to the OnStickValueUpdated Event
      mainCam = Camera.main;
      /*
      When you do moveStick.event_name += function_name, you are subscribing function_name to the event_name.
