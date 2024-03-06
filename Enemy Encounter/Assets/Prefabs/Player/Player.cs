@@ -4,32 +4,42 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] JoyStick moveStick;
+    [SerializeField] JoyStick joystick_1; //Created an instance
     [SerializeField] CharacterController characterController;
-    [SerializeField] float moveSpeed = 40f;
-    Vector2 moveInput;
+    [SerializeField] CameraController cameraController;
+    [SerializeField] float moveSpeed = 20f;
+    Vector2 DistanceMovedInput;
     Camera mainCam;
+
+
     // Start is called before the first frame update
     void Start()
     {
-     moveStick.OnStickValueUpdated += moveStickmoveStick; //subscribe the moveStickmoveStick function to the OnStickValueUpdated Event
+     joystick_1.OnStickValueUpdated += GetDistanceMoved; //subscribe the GetDistanceMoved function to the OnStickValueUpdated Event
      mainCam = Camera.main;
      /*
-     When you do moveStick.event_name += function_name, you are subscribing function_name to the event_name.
+     When you do joystick_1.event_name += function_name, you are subscribing function_name to the event_name.
      This means that when event_name is raised or triggered, function_name will be called.
-     "Hey, whenever the OnStickValueUpdated event happens in the moveStick object, call the moveStickmoveStick function."
+     "Hey, whenever the OnStickValueUpdated event happens in the joystick_1 object, call the GetDistanceMoved function."
      */
     }
-    void moveStickmoveStick(Vector2 inputValue)
+
+
+    void GetDistanceMoved(Vector2 inputValue)
     {
-        moveInput = inputValue;
+        DistanceMovedInput = inputValue;
     }
+
 
     // Update is called once per frame
     void Update()
     {
         Vector3 x_axis = mainCam.transform.right;
         Vector3 z_axis = Vector3.Cross(x_axis, Vector3.up);
-        characterController.Move((x_axis * moveInput.x + z_axis * moveInput.y) * Time.deltaTime * moveSpeed);
+        characterController.Move((x_axis * DistanceMovedInput.x + z_axis * DistanceMovedInput.y) * Time.deltaTime * moveSpeed); //Move the character
+        if (DistanceMovedInput.magnitude != 0 && cameraController != null)
+        {
+            cameraController.AddYawInput(DistanceMovedInput.x);
+        }
     }
 }

@@ -46,9 +46,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e0e36f8caec5834f9b9ff8c3c2f62a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveStick: {fileID: 0}
+  joystick_1: {fileID: 0}
   characterController: {fileID: 665115736756057651}
-  moveSpeed: 40
+  cameraController: {fileID: 0}
+  moveSpeed: 20
 --- !u!143 &665115736756057651
 CharacterController:
   m_ObjectHideFlags: 0
