@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     [SerializeField] JoyStick moveStick; //Created an instance
     [SerializeField] JoyStick aimStick;
     [SerializeField] CharacterController characterController;
-    [SerializeField] CameraController cameraController; // aalech khalitha SerializeField ?
+    [SerializeField] CameraController cameraController; 
     [SerializeField] float moveSpeed = 20f;
     [SerializeField] float  turnSpeed = 30f;
     
