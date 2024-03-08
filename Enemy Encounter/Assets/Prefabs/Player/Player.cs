@@ -10,12 +10,14 @@ public class Player : MonoBehaviour
     [SerializeField] CameraController cameraController; 
     [SerializeField] float moveSpeed = 20f;
     [SerializeField] float  turnSpeed = 30f;
+    [SerializeField] float  AnimturnSpeed = 30f;
     
     Vector2 DistanceMovedInput;
     Vector2 aimInput;
     Camera mainCam;
 
     Animator animator ;
+    float animatorTurnSpeed;
 
 
     // Start is called before the first frame update
@@ -59,12 +61,13 @@ public class Player : MonoBehaviour
 
 // make this function just to clear the code
     private void PerformMoveAndAim(){
-        Vector3 MoveDir= StickInputToWorldDirection( DistanceMovedInput) ; //control the move direction
+        Vector3 MoveDir= StickInputToWorldDirection(DistanceMovedInput) ; //control the move direction
         characterController.Move(MoveDir* Time.deltaTime * moveSpeed); //Move the character
       
         UpdateAim(MoveDir);
         
         // change animation based on MoveDirection (MoveDir)
+        //when we aim we use the aim direction to set the animation not the move direction
         //how much we are moving forward and right (back= forward -1) (calculatated via DOT product) 
         float forward = Vector3.Dot(MoveDir,transform.forward);
         float right = Vector3.Dot(MoveDir,transform.right);
@@ -96,14 +99,38 @@ public class Player : MonoBehaviour
     }
 
     private void RotationTowards(Vector3 AimDir){
+        
+          // go back to 0 if we are not aiming
+           float currentTurnSpeed=0;
         if(AimDir.magnitude != 0){
             
+            
+           
+            //save previous rotation to calculate rotationsped
+            Quaternion prevRot=transform.rotation ;
             // we want some animation when the player move from looking up to looking down instantly (rotaion progress => lerp to the rotaion instead of turn to it lerp=turn from one rotation to an other with alpha)
             // we want the player to aim in a direction while moving to another direction when he is attacked by the enemeies
             //when you aim the direction of the player is controlled by the aim not the move (aim independent from the move)
             float turnLerpAlpha = turnSpeed* Time.deltaTime; //calculating alpha
             transform.rotation=Quaternion.Lerp( transform.rotation,Quaternion.LookRotation(AimDir,Vector3.up), turnLerpAlpha);//player aim the direction (vector3.up to direct the head of the player to the direction)
+            Quaternion currentRot=transform.rotation ;
+
+            //figure out the direction
+            float direction =Vector3.Dot(AimDir,transform.right) > 0 ? 1 : -1; //if >0=1 if not -1
+            // diffrence between current rotation and the prev one (use Quaternion with mem variables)
+            float rotaionDelta = Quaternion.Angle(prevRot,currentRot) * direction;
+
+           
+
+            currentTurnSpeed=rotaionDelta / Time.deltaTime;
+            
+             
         }
+
+           // lerp this value because the turn speed is high and the player start chaking
+           animatorTurnSpeed = Mathf.Lerp(animatorTurnSpeed,currentTurnSpeed , Time.deltaTime * AnimturnSpeed );
+           animator.SetFloat("turnSpeed",animatorTurnSpeed );
+
     }
     
         
