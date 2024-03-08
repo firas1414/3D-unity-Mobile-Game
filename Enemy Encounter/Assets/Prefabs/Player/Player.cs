@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     [SerializeField] CharacterController characterController;
     [SerializeField] CameraController cameraController;
     [SerializeField] float moveSpeed = 20f;
+    [SerializeField] float  turnSpeed = 30f;
+    
     Vector2 DistanceMovedInput;
     Camera mainCam;
 
@@ -36,10 +38,20 @@ public class Player : MonoBehaviour
     {
         Vector3 x_axis = mainCam.transform.right;
         Vector3 z_axis = Vector3.Cross(x_axis, Vector3.up);
-        characterController.Move((x_axis * DistanceMovedInput.x + z_axis * DistanceMovedInput.y) * Time.deltaTime * moveSpeed); //Move the character
-        if (DistanceMovedInput.magnitude != 0 && cameraController != null)
+        Vector3 MoveDir= x_axis * DistanceMovedInput.x + z_axis * DistanceMovedInput.y ; //where we are moving
+        characterController.Move(MoveDir* Time.deltaTime * moveSpeed); //Move the character
+        if (DistanceMovedInput.magnitude != 0 )
         {
+            //we put it here because we don't want the direction to snap back when we stop moving with the joystock
+            // we want some animation when the player move from looking up to looking down instantly (rotaion progress => lerp to the rotaion instead of turn to it lerp=turn from one rotation to an other with alpha)
+            float turnLerpAlpha = turnSpeed* Time.deltaTime; //calculating alpha
+            transform.rotation=Quaternion.Lerp( transform.rotation,Quaternion.LookRotation(MoveDir,Vector3.up), turnSpeed);//player face the direction (vector3.up to direct the head of the player to the direction)
+            if(cameraController != null){
             cameraController.AddYawInput(DistanceMovedInput.x);
+            }
+
+             }
+           
         }
-    }
+        
 }
