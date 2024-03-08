@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
     }
 
     private void  UpdateAim(Vector3 currentMoveDir){
-        Vector3 AimDir= MoveDir ; //control the aim direction
+        Vector3 AimDir= currentMoveDir ; //control the aim direction
         //ckech if the player is trying to aim (if we are not aiming aim is where we are moving)
         if(aimInput.magnitude != 0){
             AimDir= StickInputToWorldDirection(aimInput);

@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7520198982046336522}
   - component: {fileID: 665115736756057651}
+  - component: {fileID: 5049342586245240924}
+  - component: {fileID: -8717102689161204729}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -59,6 +61,44 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1.24, z: 0}
+--- !u!114 &5049342586245240924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3481141600994457878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e0e36f8caec5834f9b9ff8c3c2f62a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveStick: {fileID: 0}
+  aimStick: {fileID: 0}
+  characterController: {fileID: 0}
+  moveSpeed: 20
+  turnSpeed: 30
+--- !u!95 &-8717102689161204729
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3481141600994457878}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: a5674d01884853d4e8f2386a171e14d9, type: 3}
+  m_Controller: {fileID: 9100000, guid: b06485c6ed011a1478c08fe38f3acdbf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &3376077659242668858
 PrefabInstance:
   m_ObjectHideFlags: 0
