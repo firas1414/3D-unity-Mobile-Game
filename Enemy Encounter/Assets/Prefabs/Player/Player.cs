@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
     Vector2 aimInput;
     Camera mainCam;
 
+    Animator animator ;
+
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +24,7 @@ public class Player : MonoBehaviour
      moveStick.OnStickValueUpdated += GetDistanceMoved; //subscribe the GetDistanceMoved function to the OnStickValueUpdated Event
      aimStick.OnStickValueUpdated +=aimStickUpdated;
      mainCam = Camera.main;
+     animator=GetComponent<Animator>();
      /*
      When you do joystick_1.event_name += function_name, you are subscribing function_name to the event_name.
      This means that when event_name is raised or triggered, function_name will be called.
@@ -29,7 +32,7 @@ public class Player : MonoBehaviour
      */
     }
 
-    //turn the 2D direction to 3D direction
+    //turn the 2D direction to 3D direction (calculation)
     Vector3 StickInputToWorldDirection (Vector2 inputValue) {
         Vector3 x_axis = mainCam.transform.right;
         Vector3 z_axis = Vector3.Cross(x_axis, Vector3.up);
@@ -51,13 +54,23 @@ public class Player : MonoBehaviour
     {
         PerformMoveAndAim();
         UpdateCamera();
+
     }
 
 // make this function just to clear the code
     private void PerformMoveAndAim(){
         Vector3 MoveDir= StickInputToWorldDirection( DistanceMovedInput) ; //control the move direction
         characterController.Move(MoveDir* Time.deltaTime * moveSpeed); //Move the character
+      
         UpdateAim(MoveDir);
+        
+        // change animation based on MoveDirection (MoveDir)
+        //how much we are moving forward and right (back= forward -1) (calculatated via DOT product) 
+        float forward = Vector3.Dot(MoveDir,transform.forward);
+        float right = Vector3.Dot(MoveDir,transform.right);
+        animator.SetFloat("forwardSpeed",forward);
+        animator.SetFloat("rightSpeed",right);
+        
 
     }
 

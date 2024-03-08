@@ -20,7 +20,7 @@ public void OnDrag(PointerEventData eventData)
     Vector2 TouchPos = eventData.position; //The finger position(x,y)
     Vector2 centerPos = BackgroundTrans.position; //The center of the Background white cercle(x,y)
     Vector2 localOffset = Vector2.ClampMagnitude(TouchPos - centerPos,BackgroundTrans.sizeDelta.x/2); //localOffset represents the distance moved from the center(x,y)
-    Vector2 DistanceMovedInput = localOffset / BackgroundTrans.sizeDelta.x/2;
+    Vector2 DistanceMovedInput = localOffset / (BackgroundTrans.sizeDelta.x/2);
     ThumbStickTrans.position = centerPos + localOffset; //Move the stick 
     OnStickValueUpdated?.Invoke(DistanceMovedInput); //Trigger the event and passing DistanceMovedInput as the argument
 }
