@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] float  turnSpeed = 30f;
     [SerializeField] float  AnimturnSpeed = 30f;
     
-    Vector2 DistanceMovedInput;
+    Vector2 moveStickUpdated;
     Vector2 aimInput;
     Camera mainCam;
 
@@ -23,14 +23,14 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-     moveStick.OnStickValueUpdated += GetDistanceMoved; //subscribe the GetDistanceMoved function to the OnStickValueUpdated Event
+     moveStick.OnStickValueUpdated += GetmoveStickUpdated; //subscribe the GetmoveStickUpdated function to the OnStickValueUpdated Event
      aimStick.OnStickValueUpdated +=aimStickUpdated;
      mainCam = Camera.main;
      animator=GetComponent<Animator>();
      /*
      When you do joystick_1.event_name += function_name, you are subscribing function_name to the event_name.
      This means that when event_name is raised or triggered, function_name will be called.
-     "Hey, whenever the OnStickValueUpdated event happens in the joystick_1 object, call the GetDistanceMoved function."
+     "Hey, whenever the OnStickValueUpdated event happens in the joystick_1 object, call the GetmoveStickUpdated function."
      */
     }
 
@@ -45,9 +45,9 @@ public class Player : MonoBehaviour
     void aimStickUpdated(Vector2 inputValue){
         aimInput = inputValue;
      }
-    void GetDistanceMoved(Vector2 inputValue)
+    void GetmoveStickUpdated(Vector2 inputValue)
     {
-        DistanceMovedInput = inputValue;
+        moveStickUpdated = inputValue;
     }
 
 
@@ -61,7 +61,7 @@ public class Player : MonoBehaviour
 
 // make this function just to clear the code
     private void PerformMoveAndAim(){
-        Vector3 MoveDir= StickInputToWorldDirection(DistanceMovedInput) ; //control the move direction
+        Vector3 MoveDir= StickInputToWorldDirection(moveStickUpdated) ; //control the move direction
         characterController.Move(MoveDir* Time.deltaTime * moveSpeed); //Move the character
       
         UpdateAim(MoveDir);
@@ -89,10 +89,10 @@ public class Player : MonoBehaviour
 
     private void UpdateCamera(){
         // don't update camera direction while aiming (if the player move and don't aim)
-        if (DistanceMovedInput.magnitude != 0 && aimInput.magnitude == 0 && cameraController != null) 
+        if (moveStickUpdated.magnitude != 0 && aimInput.magnitude == 0 && cameraController != null) 
         {
             
-            cameraController.AddYawInput(DistanceMovedInput.x);
+            cameraController.AddYawInput(moveStickUpdated.x);
             
 
         }
