@@ -4,29 +4,29 @@ using UnityEngine;
 
 public class InventoryComponent : MonoBehaviour
 {
-   // weapon that start with the player in the game
+   // Weapon that the player starts with in the game
    [SerializeField] Weapon[] initWeaponsPrefabs;
    
-   //default place of the weapons (when you can't find the slot for the weapon)
+   // Default place of the weapons (when you can't find the slot for the weapon)
     [SerializeField] Transform defaultWeaponSlot;
    
-   //Location of the weapons (slots)
+   // Location of the weapons (slots)
    [SerializeField] Transform[] weaponSlots;
 
-   //create a refrence for the current weapon
+   // create a refrence for the current weapon
    int currentWeaponIndex = -1;
 
-   //know the weapons that we have 
+   // List of weapons the player can have
    List<Weapon> weapons;
 
    private void Start(){
        InitializeWeapons();
    }
 
-
+   // This will be executed at the start of the game
 private void InitializeWeapons(){
        
-       weapons= new List<Weapon>();
+       weapons = new List<Weapon>(); //Initialize empty list of weapons we can have
        foreach(Weapon weapon in initWeaponsPrefabs) {
           Transform weaponSlot = defaultWeaponSlot;
           foreach(Transform slot in weaponSlots){

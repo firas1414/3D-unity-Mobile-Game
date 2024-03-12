@@ -5,13 +5,13 @@ using UnityEngine;
 //Weapon is the parent class of the other (riffle and pistol)
 public abstract class Weapon : MonoBehaviour
 {
-    //initial posting of the weapon
+    // SlotTag Name of the weapon(which represents the position of the weapon)
     [SerializeField] string AttachSlotTag;
 
     //change the animation when change the player
     [SerializeField] AnimatorOverrideController overrideController;
 
-    //return the initial position of the weapon
+    // Return the SlotTag Name of the weapon
     public string GetAttachSlotTag()
     {
         return AttachSlotTag;
@@ -23,7 +23,13 @@ public abstract class Weapon : MonoBehaviour
         get;
         private set;
     }
-
+    /*
+    get;: This means that other parts of the program can read the value of this property. So, if someone wants to know what GameObject owns this weapon,
+    they can ask and get the answer.
+    private set;: This means that only this class itself can change the value of Owner. Other parts of the program cannot directly change it. It's like saying,
+    Hey, only this class is allowed to decide who the owner is, nobody else can mess with it."
+    */
+    
     //assign the owner
     public void Init(GameObject owner)
     {
