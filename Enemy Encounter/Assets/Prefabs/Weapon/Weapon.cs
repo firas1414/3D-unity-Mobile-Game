@@ -5,9 +5,11 @@ using UnityEngine;
 //Weapon is the parent class of the other (riffle and pistol)
 public abstract class Weapon : MonoBehaviour
 {
+    //initial posting of the weapon
     [SerializeField] string AttachSlotTag;
     
 
+   //return teh intial position of the weapon
     public string GetAttachSlotTag(){
         return AttachSlotTag;
     }
@@ -21,6 +23,8 @@ public abstract class Weapon : MonoBehaviour
    public void Init(GameObject owner)
    {
      Owner=owner;
+     //desactivate the weapon in the begining (be in the backpack not in hands)
+     UnEquip();
    }
 
    //equip and unequip
