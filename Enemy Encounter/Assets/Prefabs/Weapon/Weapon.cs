@@ -7,32 +7,41 @@ public abstract class Weapon : MonoBehaviour
 {
     //initial posting of the weapon
     [SerializeField] string AttachSlotTag;
-    
 
-   //return teh intial position of the weapon
-    public string GetAttachSlotTag(){
+    //change the animation when change the player
+    [SerializeField] AnimatorOverrideController overrideController;
+
+    //return the initial position of the weapon
+    public string GetAttachSlotTag()
+    {
         return AttachSlotTag;
     }
-   //Define the owner
-   public GameObject Owner {
-      get;
-      private set;
-   }
 
-   //assign the owner
-   public void Init(GameObject owner)
-   {
-     Owner=owner;
-     //desactivate the weapon in the begining (be in the backpack not in hands)
-     UnEquip();
-   }
+    //Define the owner
+    public GameObject Owner
+    {
+        get;
+        private set;
+    }
 
-   //equip and unequip
-   public void Equip(){
-      gameObject.SetActive(true);
-   }
-   
-   public void UnEquip(){
-      gameObject.SetActive(false);
-   }
+    //assign the owner
+    public void Init(GameObject owner)
+    {
+        Owner = owner;
+        //deactivate the weapon in the beginning (be in the backpack not in hands)
+        UnEquip();
+    }
+
+    //equip and unequip
+    public void Equip()
+    {
+        gameObject.SetActive(true);
+        //override the default animation with the equipped weapon animation
+        Owner.GetComponent<Animator>().runtimeAnimatorController = overrideController;
+    }
+
+    public void UnEquip()
+    {
+        gameObject.SetActive(false);
+    }
 }
