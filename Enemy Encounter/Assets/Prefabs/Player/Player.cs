@@ -11,6 +11,10 @@ public class Player : MonoBehaviour
     [SerializeField] float moveSpeed = 20f;
     [SerializeField] float  turnSpeed = 30f;
     [SerializeField] float  AnimturnSpeed = 30f;
+
+    [Header("Inventory")]
+    [SerializeField] InventoryComponent inventoryComponent;
+    
     
     Vector2 moveStickUpdated;
     Vector2 aimInput;
@@ -25,13 +29,19 @@ public class Player : MonoBehaviour
     {
      moveStick.OnStickValueUpdated += GetmoveStickUpdated; //subscribe the GetmoveStickUpdated function to the OnStickValueUpdated Event
      aimStick.OnStickValueUpdated +=aimStickUpdated;
+     aimStick.onStickTaped += SwitchWeapon;
      mainCam = Camera.main;
      animator=GetComponent<Animator>();
+    
      /*
      When you do joystick_1.event_name += function_name, you are subscribing function_name to the event_name.
      This means that when event_name is raised or triggered, function_name will be called.
      "Hey, whenever the OnStickValueUpdated event happens in the joystick_1 object, call the GetmoveStickUpdated function."
      */
+    }
+
+    void SwitchWeapon(){
+        inventoryComponent.NextWeapon();
     }
 
     //turn the 2D direction to 3D direction (calculation)
