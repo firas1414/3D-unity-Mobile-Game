@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d45ce484f4177224495de706e19caa74
+guid: 060b201a404742c4b8f97e36095ef4f6
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Rifle_Firing
+      name: Pistol_Firing
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 15
+      lastFrame: 70
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
