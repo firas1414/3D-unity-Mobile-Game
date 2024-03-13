@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class InventoryComponent : MonoBehaviour
 {
-   // Weapon that the player starts with in the game
+   // An array of Weapon objects that represent the initial weapons the player starts with in the game.
    [SerializeField] Weapon[] initWeaponsPrefabs;
    
-   // Default place of the weapons (when you can't find the slot for the weapon)
+   // A transform representing the default location where weapons are placed when they don't have a specific slot.
     [SerializeField] Transform defaultWeaponSlot;
    
-   // Location of the weapons (slots)
+   // An array of transforms representing the locations where weapons can be equipped.
    [SerializeField] Transform[] weaponSlots;
 
-   // create a refrence for the current weapon
+   // An integer indicating the index of the currently equipped weapon (-1 means no weapon is equipped).
    int currentWeaponIndex = -1;
 
-   // List of weapons the player can have
+   // A list that stores references to all the weapons the player has.
    List<Weapon> weapons;
 
    private void Start(){
@@ -35,12 +35,17 @@ private void InitializeWeapons(){
                 weaponSlot=slot;
             }
           } 
-          Weapon newWeapon = Instantiate(weapon,weaponSlot);
+          Weapon newWeapon = Instantiate(weapon,weaponSlot); 
+          /*
+          'weaponSlot' is a GameObject. In Unity, 
+          the Transform component is attached to GameObjects to represent their position, rotation, and scale.
+          When you access the Transform component of a GameObject, you're essentially accessing the information about its position and orientation in the game world.
+          */
           newWeapon.Init(gameObject);
           weapons.Add(newWeapon);
        }
 
-       NextWeapon();
+       NextWeapon(); // Equip first weapon in the bag
 
    }
 
@@ -58,12 +63,10 @@ public void NextWeapon(){
 }
 
 private void EquipWeapon(int WeaponIndex){
-    //check index out of bounds or not
     if(WeaponIndex < 0 || WeaponIndex >= weapons.Count){
         return;
     }
     
-    //check if the weapon exists (in the bounbs)
     if(currentWeaponIndex >= 0 && currentWeaponIndex < weapons.Count){
         weapons[currentWeaponIndex].UnEquip();
 
