@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3161779662284926318}
   - component: {fileID: -2727870830918744957}
+  - component: {fileID: -5753655163506464461}
   m_Layer: 0
   m_Name: Pistol
   m_TagString: Untagged
@@ -31,6 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1359705351667741343}
+  - {fileID: 3714352264926009515}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-2727870830918744957
@@ -47,6 +49,54 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttachSlotTag: PistolSlotTag
   overrideController: {fileID: 22100000, guid: db7b4ea9c03520842a64dd0e09d324f7, type: 2}
+--- !u!114 &-5753655163506464461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155803689557078889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 775b59cb7d7a8a743ac0d17b3c6f34bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  muzzle: {fileID: 3714352264926009515}
+  aimRange: 1000
+  aimMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!1 &7913035560491212509
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3714352264926009515}
+  m_Layer: 0
+  m_Name: Muzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3714352264926009515
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7913035560491212509}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0.000000024214387, y: 0.0687, z: -0.2573}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3161779662284926318}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1001 &1359705351667869721
 PrefabInstance:
   m_ObjectHideFlags: 0
