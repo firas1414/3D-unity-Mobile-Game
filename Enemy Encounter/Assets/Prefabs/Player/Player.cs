@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     {
      moveStick.OnStickValueUpdated += GetmoveStickUpdated; //subscribe the GetmoveStickUpdated function to the OnStickValueUpdated Event
      aimStick.OnStickValueUpdated +=aimStickUpdated;
-     aimStick.onStickTaped += SwitchWeapon;
+     aimStick.onStickTaped += StartSwitchWeapon;
      mainCam = Camera.main;
      animator=GetComponent<Animator>();
     
@@ -40,7 +40,10 @@ public class Player : MonoBehaviour
      */
     }
 
-    void SwitchWeapon(){
+    void StartSwitchWeapon(){
+        animator.SetTrigger("switchWeapon");
+    }
+    public void SwitchWeapon(){
         inventoryComponent.NextWeapon();
     }
 

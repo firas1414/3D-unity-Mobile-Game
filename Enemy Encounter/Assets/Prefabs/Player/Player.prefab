@@ -126,8 +126,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initWeaponsPrefabs:
-  - {fileID: -2727870830918744957, guid: 9ea9d890d0a28d94a8b99f7e468ac290, type: 3}
   - {fileID: 1510872586457928191, guid: 4b21fe5f54b1501488c7b925ac569776, type: 3}
+  - {fileID: -2727870830918744957, guid: 9ea9d890d0a28d94a8b99f7e468ac290, type: 3}
   defaultWeaponSlot: {fileID: 3376077659242807254}
   weaponSlots:
   - {fileID: 120312099674263108}
