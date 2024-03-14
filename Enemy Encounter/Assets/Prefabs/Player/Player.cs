@@ -40,6 +40,12 @@ public class Player : MonoBehaviour
      */
     }
 
+
+    public void AttackPoint(){
+        inventoryComponent.GetActiveWeapon().Attack();
+    }
+
+
     void StartSwitchWeapon(){
         animator.SetTrigger("switchWeapon");
     }

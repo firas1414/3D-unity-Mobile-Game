@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class Rifle : Weapon
 {
+    [SerializeField] AimComponent aimComp;
+
+
+
+    public override void Attack(){
+        GameObject target = aimComp.GetAimTarget(); // Get the GameObject Target
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {

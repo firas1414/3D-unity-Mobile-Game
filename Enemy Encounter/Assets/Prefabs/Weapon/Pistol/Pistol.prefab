@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttachSlotTag: PistolSlotTag
   overrideController: {fileID: 22100000, guid: db7b4ea9c03520842a64dd0e09d324f7, type: 2}
+  aimComp: {fileID: -5753655163506464461}
 --- !u!114 &-5753655163506464461
 MonoBehaviour:
   m_ObjectHideFlags: 0

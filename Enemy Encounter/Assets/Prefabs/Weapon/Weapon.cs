@@ -5,11 +5,14 @@ using UnityEngine;
 //Weapon is the parent class of the other (riffle and pistol)
 public abstract class Weapon : MonoBehaviour
 {
+    [SerializeField] float AttackRateMult;
     // SlotTag Name of the weapon(which represents the position of the weapon)
     [SerializeField] string AttachSlotTag;
 
     //change the animation when change the player
     [SerializeField] AnimatorOverrideController overrideController;
+
+    public abstract void Attack();
 
     // Return the SlotTag Name of the weapon
     public string GetAttachSlotTag()
@@ -44,6 +47,7 @@ public abstract class Weapon : MonoBehaviour
         gameObject.SetActive(true);
         //override the default animation with the equipped weapon animation
         Owner.GetComponent<Animator>().runtimeAnimatorController = overrideController;
+        Owner.GetComponent<Animator>().SetFloat("AttackRateMult", AttackRateMult);
     }
 
     public void UnEquip()

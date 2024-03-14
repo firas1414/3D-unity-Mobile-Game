@@ -46,8 +46,7 @@ private void InitializeWeapons(){
        }
 
        NextWeapon(); // Equip first weapon in the bag
-
-   }
+       }
 
 //equip the next weapon
 public void NextWeapon(){
@@ -58,9 +57,14 @@ public void NextWeapon(){
     }
 
     EquipWeapon(nextWeaponIndex);
+    }
 
-    
-}
+
+    internal Weapon GetActiveWeapon()
+    {
+    return weapons[currentWeaponIndex];
+    }
+
 
 private void EquipWeapon(int WeaponIndex){
     if(WeaponIndex < 0 || WeaponIndex >= weapons.Count){
