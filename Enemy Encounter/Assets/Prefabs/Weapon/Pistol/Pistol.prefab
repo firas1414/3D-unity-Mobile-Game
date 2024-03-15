@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ff4467d44fe5a4e93846b423bc781d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AttackRateMult: 0
   AttachSlotTag: PistolSlotTag
   overrideController: {fileID: 22100000, guid: db7b4ea9c03520842a64dd0e09d324f7, type: 2}
   aimComp: {fileID: -5753655163506464461}

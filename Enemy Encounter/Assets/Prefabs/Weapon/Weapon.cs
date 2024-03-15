@@ -5,7 +5,7 @@ using UnityEngine;
 //Weapon is the parent class of the other (riffle and pistol)
 public abstract class Weapon : MonoBehaviour
 {
-    [SerializeField] float AttackRateMult;
+    //[SerializeField] float AttackRateMult =1f;
     // SlotTag Name of the weapon(which represents the position of the weapon)
     [SerializeField] string AttachSlotTag;
 
@@ -47,11 +47,19 @@ public abstract class Weapon : MonoBehaviour
         gameObject.SetActive(true);
         //override the default animation with the equipped weapon animation
         Owner.GetComponent<Animator>().runtimeAnimatorController = overrideController;
-        Owner.GetComponent<Animator>().SetFloat("AttackRateMult", AttackRateMult);
+        //Owner.GetComponent<Animator>().SetFloat("AttackRateMult", AttackRateMult);
     }
 
     public void UnEquip()
     {
         gameObject.SetActive(false);
+    }
+
+    public void DamageGameObject(GameObject objToDamage, float amt){
+        HealthComponent healthComp = objToDamage.GetComponent<HealthComponent>();
+        if(healthComp != null ){
+              healthComp.changeHealth(-amt);
+        }
+       
     }
 }
