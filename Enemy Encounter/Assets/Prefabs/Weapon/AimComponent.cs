@@ -10,10 +10,11 @@ public class AimComponent : MonoBehaviour
 
 
 
-    public GameObject GetAimTarget(){
+    public GameObject GetAimTarget(out Vector3 aimDir){
 
         Vector3 aimStart = muzzle.position;
-        if(Physics.Raycast(aimStart, GetAimDir(), out RaycastHit hitInfo, aimRange, aimMask))
+        aimDir=GetAimDir();
+        if(Physics.Raycast(aimStart, aimDir, out RaycastHit hitInfo, aimRange, aimMask))
         {
             return hitInfo.collider.gameObject;
         }

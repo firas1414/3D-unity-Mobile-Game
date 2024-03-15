@@ -35,6 +35,6 @@ public class HealthComponent : MonoBehaviour
             onHealthEmpty?.Invoke();
         }
 
-        Debug.Log($"{gameObject.name} , taking damage : {amt} , health : {health}");
+        //Debug.Log($"{gameObject.name} , taking damage : {amt} , health : {health}");
     }
 }
