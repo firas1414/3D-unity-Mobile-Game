@@ -5,23 +5,18 @@ using UnityEngine;
 //Weapon is the parent class of the other (riffle and pistol)
 public abstract class Weapon : MonoBehaviour
 {
-    //[SerializeField] float AttackRateMult =1f;
-    // SlotTag Name of the weapon(which represents the position of the weapon)
-    [SerializeField] string AttachSlotTag;
 
-    //change the animation when change the player
-    [SerializeField] AnimatorOverrideController overrideController;
+    [SerializeField] string AttachSlotTag; // SlotTag Name of the weapon(which represents the position of the weapon)
+    [SerializeField] AnimatorOverrideController overrideController; // change the animation when change the player
 
     public abstract void Attack();
 
-    // Return the SlotTag Name of the weapon
-    public string GetAttachSlotTag()
+    public string GetAttachSlotTag() // Return the SlotTag Name of the weapon
     {
         return AttachSlotTag;
     }
 
-    //Define the owner
-    public GameObject Owner
+    public GameObject Owner // Define the weapon owner
     {
         get;
         private set;
@@ -33,15 +28,12 @@ public abstract class Weapon : MonoBehaviour
     Hey, only this class is allowed to decide who the owner is, nobody else can mess with it."
     */
     
-    //assign the owner
-    public void Init(GameObject owner)
+    public void Init(GameObject owner) // assign the owner
     {
         Owner = owner;
-        //deactivate the weapon in the beginning (be in the backpack not in hands)
-        UnEquip();
+        UnEquip(); // deactivate the weapon in the beginning (be in the backpack not in hands)
     }
 
-    //equip and unequip
     public void Equip()
     {
         gameObject.SetActive(true);
