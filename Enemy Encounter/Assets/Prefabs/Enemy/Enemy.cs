@@ -6,15 +6,11 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] HealthComponent healthComponent;
     [SerializeField] Animator animator;
-    void Start()
-    {
-        if(healthComponent != null){
-            healthComponent.onDied += StartDeath;
-            healthComponent.onTakeDamage += TakenDamge;
-        }
-    }
 
-    private void TakenDamge(float health , float delta , float maxHealth){
+
+
+
+    private void TakenDamge(float health , float amount , float maxHealth){
 
     }
 
@@ -31,6 +27,15 @@ public class Enemy : MonoBehaviour
 
     public void OnDeathAnimationFinished(){
         Destroy(gameObject);
+    }
+
+
+        void Start()
+    {
+        if(healthComponent != null){
+            healthComponent.onDied += StartDeath;
+            healthComponent.onTakeDamage += TakenDamge;
+        }
     }
 
     // Update is called once per frame

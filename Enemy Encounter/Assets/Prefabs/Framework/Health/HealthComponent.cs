@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class HealthComponent : MonoBehaviour
 {
-    public delegate void OnHealthChange(float current_Health, float delta, float maxHealth);
-    public delegate void OnTakeDamage(float current_Health, float delta, float maxHealth);
+    public delegate void OnHealthChange(float current_Health, float amount, float maxHealth);
+    public delegate void OnTakeDamage(float current_Health, float amount, float maxHealth);
     public delegate void OnDied();
 
     [SerializeField] float current_Health = 100; 
@@ -25,11 +25,11 @@ public class HealthComponent : MonoBehaviour
 
         if (amt < 0)
         {
-            onTakeDamage?.Invoke(current_Health, amt, maxHealth);
+            onTakeDamage?.Invoke(current_Health, amt, maxHealth); // Damage
         }
-        onHealthChange?.Invoke(current_Health, amt, maxHealth);
+        onHealthChange?.Invoke(current_Health, amt, maxHealth); // Increase Health
 
-        if (current_Health <= 0)
+        if (current_Health <= 0) // Death
         {
             current_Health = 0;
             onDied?.Invoke();
