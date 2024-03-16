@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         if(healthComponent != null){
-            healthComponent.onHealthEmpty += StartDeath;
+            healthComponent.onDied += StartDeath;
             healthComponent.onTakeDamage += TakenDamge;
         }
     }
