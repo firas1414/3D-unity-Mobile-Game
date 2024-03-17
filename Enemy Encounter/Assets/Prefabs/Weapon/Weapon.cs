@@ -39,7 +39,6 @@ public abstract class Weapon : MonoBehaviour
         gameObject.SetActive(true);
         //override the default animation with the equipped weapon animation
         Owner.GetComponent<Animator>().runtimeAnimatorController = overrideController;
-        //Owner.GetComponent<Animator>().SetFloat("AttackRateMult", AttackRateMult);
     }
 
     public void UnEquip()
