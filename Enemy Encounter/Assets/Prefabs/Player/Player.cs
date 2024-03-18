@@ -4,22 +4,19 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] JoyStick moveStick; //Created an instance
+    [SerializeField] JoyStick moveStick; //Created an instance of JoyStick class
     [SerializeField] JoyStick aimStick;
     [SerializeField] CharacterController characterController;
     [SerializeField] CameraController cameraController; 
     [SerializeField] float moveSpeed = 20f;
     [SerializeField] float  turnSpeed = 30f;
     [SerializeField] float  AnimturnSpeed = 30f;
-
     [Header("Inventory")]
     [SerializeField] InventoryComponent inventoryComponent;
-    
     
     Vector2 moveStickUpdated;
     Vector2 aimInput;
     Camera mainCam;
-
     Animator animator ;
     float animatorTurnSpeed;
 
