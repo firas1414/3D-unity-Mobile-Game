@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     [Header("Inventory")]
     [SerializeField] InventoryComponent inventoryComponent;
     
-    Vector2 moveStickUpdated;
+    Vector2 moveStickUpdated; // MoveStick value
     Vector2 aimInput;
     Camera mainCam;
     Animator animator ;
@@ -35,6 +35,12 @@ public class Player : MonoBehaviour
      This means that when event_name is raised or triggered, function_name will be called.
      "Hey, whenever the OnStickValueUpdated event happens in the joystick_1 instance, call the GetmoveStickUpdated function."
      */
+    }
+
+
+    void GetmoveStickUpdated(Vector2 inputValue)
+    {
+        moveStickUpdated = inputValue;
     }
 
 
@@ -68,10 +74,6 @@ public class Player : MonoBehaviour
             animator.SetBool("attacking",false);
         }
      }
-    void GetmoveStickUpdated(Vector2 inputValue)
-    {
-        moveStickUpdated = inputValue;
-    }
 
 
     // Update is called once per frame
