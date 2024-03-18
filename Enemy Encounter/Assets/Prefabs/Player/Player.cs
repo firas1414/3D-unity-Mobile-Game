@@ -24,16 +24,16 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-     moveStick.OnStickValueUpdated += GetmoveStickUpdated; //subscribe the GetmoveStickUpdated function to the OnStickValueUpdated Event
-     aimStick.OnStickValueUpdated +=aimStickUpdated;
-     aimStick.onStickTaped += StartSwitchWeapon;
+     moveStick.OnStickValueUpdated += GetmoveStickUpdated; // Each time the stick value gets updated, the GetmoveStickUpdated function will be called
+     aimStick.OnStickValueUpdated +=aimStickUpdated; // Each time the stick value gets updated, the aimStickUpdated function will be called
+     aimStick.onStickTaped += StartSwitchWeapon; // Each time the aim stick gets tapped, the StartSwitchWeapon function will be called
      mainCam = Camera.main;
      animator=GetComponent<Animator>();
     
      /*
      When you do joystick_1.event_name += function_name, you are subscribing function_name to the event_name.
      This means that when event_name is raised or triggered, function_name will be called.
-     "Hey, whenever the OnStickValueUpdated event happens in the joystick_1 object, call the GetmoveStickUpdated function."
+     "Hey, whenever the OnStickValueUpdated event happens in the joystick_1 instance, call the GetmoveStickUpdated function."
      */
     }
 
