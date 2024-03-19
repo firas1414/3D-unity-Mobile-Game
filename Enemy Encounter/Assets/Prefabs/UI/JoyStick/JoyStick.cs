@@ -18,7 +18,7 @@ public class JoyStick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
     [SerializeField] RectTransform BackgroundTrans;
     [SerializeField] RectTransform CenterTrans;
 
-    bool AimAimWasDragged; // detect the tap to switch the weapon
+    bool AimWasDragged; // detect the tap to switch the weapon
    
     public void OnDrag(PointerEventData eventData)
     {

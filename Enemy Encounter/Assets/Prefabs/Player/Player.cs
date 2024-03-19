@@ -105,7 +105,6 @@ public class Player : MonoBehaviour
         Vector3 AimDir= currentMoveDir ; // Get the aim direction(which is the same as move direction if the player is not aiming)
         if(aimInput.magnitude != 0){ // Check if the player is aimnig: true->Aim diretion = AimStick Direction      False->Aim direction = MoveStick Direction
             AimDir= StickInputToWorldDirection(aimInput);
-
         }
         RotationTowards(AimDir);
     }
@@ -123,16 +122,25 @@ public class Player : MonoBehaviour
         float currentTurnSpeed=0;
         if(AimDir.magnitude != 0){
             //save previous rotation to calculate rotationsped
-            Quaternion prevRot=transform.rotation ;
-            // we want some animation when the player move from looking up to looking down instantly (rotaion progress => lerp to the rotaion instead of turn to it lerp=turn from one rotation to an other with alpha)
-            // we want the player to aim in a direction while moving to another direction when he is attacked by the enemeies
-            //when you aim the direction of the player is controlled by the aim not the move (aim independent from the move)
-            float turnLerpAlpha = turnSpeed* Time.deltaTime; //calculating alpha
-            transform.rotation=Quaternion.Lerp( transform.rotation,Quaternion.LookRotation(AimDir,Vector3.up), turnLerpAlpha);//player aim the direction (vector3.up to direct the head of the player to the direction)
-            Quaternion currentRot=transform.rotation ;
-
+            Quaternion prevRot = transform.rotation ; // The transform.rotation represents the rotation of the GameObject this script is attached to
+            /*
+            This code aims to smoothly animate the player's rotation when transitioning from looking up to looking down,
+            and allows the player to aim independently of their movement direction, particularly when attacked by enemies.
+            */
+            float turnLerpAlpha = turnSpeed* Time.deltaTime; // turnLerpAlpha is a value used to determine the rate of rotation of the character towards the direction it wants to face
+            transform.rotation = Quaternion.Lerp( transform.rotation,Quaternion.LookRotation(AimDir,Vector3.up), turnLerpAlpha);
+            // This line of code smoothly rotates the character's current rotation towards a desired direction specified by AimDir using linear interpolation,
+            // ensuring a gradual and fluid rotation.
+            Quaternion currentRot = transform.rotation;
             //figure out the direction
-            float direction =Vector3.Dot(AimDir,transform.right) > 0 ? 1 : -1; //if >0=1 if not -1
+            float direction;
+            if (Vector3.Dot(AimDir, transform.right) > 0) // If the direction is closer to my right
+            {
+                direction = 1;
+            } else // If the direction is closer to my left
+            {
+                direction = -1;
+            }
             // diffrence between current rotation and the prev one (use Quaternion with mem variables)
             float rotaionDelta = Quaternion.Angle(prevRot,currentRot) * direction;
             currentTurnSpeed=rotaionDelta / Time.deltaTime;
