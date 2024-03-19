@@ -86,9 +86,8 @@ public class Player : MonoBehaviour
 
 // make this function just to clear the code
     private void PerformMoveAndAim(){
-        Vector3 MoveDir= StickInputToWorldDirection(moveStickUpdated) ; //control the move direction
-        characterController.Move(MoveDir* Time.deltaTime * moveSpeed); //Move the character
-      
+        Vector3 MoveDir= StickInputToWorldDirection(moveStickUpdated) ; // Get the move direction
+        characterController.Move(MoveDir* Time.deltaTime * moveSpeed); // Move the character
         UpdateAim(MoveDir);
         
         // change animation based on MoveDirection (MoveDir)
@@ -103,9 +102,8 @@ public class Player : MonoBehaviour
     }
 
     private void  UpdateAim(Vector3 currentMoveDir){
-        Vector3 AimDir= currentMoveDir ; //control the aim direction
-        //ckech if the player is trying to aim (if we are not aiming aim is where we are moving)
-        if(aimInput.magnitude != 0){
+        Vector3 AimDir= currentMoveDir ; // Get the aim direction(which is the same as move direction if the player is not aiming)
+        if(aimInput.magnitude != 0){ // Check if the player is aimnig: true->Aim diretion = AimStick Direction      False->Aim direction = MoveStick Direction
             AimDir= StickInputToWorldDirection(aimInput);
 
         }
@@ -116,21 +114,14 @@ public class Player : MonoBehaviour
         // don't update camera direction while aiming (if the player move and don't aim)
         if (moveStickUpdated.magnitude != 0 && aimInput.magnitude == 0 && cameraController != null) 
         {
-            
             cameraController.AddYawInput(moveStickUpdated.x);
-            
-
         }
     }
 
     private void RotationTowards(Vector3 AimDir){
-        
-          // go back to 0 if we are not aiming
-           float currentTurnSpeed=0;
+        // go back to 0 if we are not aiming
+        float currentTurnSpeed=0;
         if(AimDir.magnitude != 0){
-            
-            
-           
             //save previous rotation to calculate rotationsped
             Quaternion prevRot=transform.rotation ;
             // we want some animation when the player move from looking up to looking down instantly (rotaion progress => lerp to the rotaion instead of turn to it lerp=turn from one rotation to an other with alpha)
@@ -144,18 +135,12 @@ public class Player : MonoBehaviour
             float direction =Vector3.Dot(AimDir,transform.right) > 0 ? 1 : -1; //if >0=1 if not -1
             // diffrence between current rotation and the prev one (use Quaternion with mem variables)
             float rotaionDelta = Quaternion.Angle(prevRot,currentRot) * direction;
-
-           
-
             currentTurnSpeed=rotaionDelta / Time.deltaTime;
-            
-             
-        }
+            }
 
            // lerp this value because the turn speed is high and the player start chaking
            animatorTurnSpeed = Mathf.Lerp(animatorTurnSpeed,currentTurnSpeed , Time.deltaTime * AnimturnSpeed );
            animator.SetFloat("turnSpeed",animatorTurnSpeed );
-
     }
     
         

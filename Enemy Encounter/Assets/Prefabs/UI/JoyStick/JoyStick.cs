@@ -18,8 +18,7 @@ public class JoyStick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
     [SerializeField] RectTransform BackgroundTrans;
     [SerializeField] RectTransform CenterTrans;
 
-    //detect the tab to switch the weapon
-    bool bWasDragging;
+    bool AimAimWasDragged; // detect the tap to switch the weapon
    
     public void OnDrag(PointerEventData eventData)
     {
@@ -29,23 +28,22 @@ public class JoyStick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
         Vector2 DistanceMovedInput = localOffset / (BackgroundTrans.sizeDelta.x / 2);
         ThumbStickTrans.position = centerPos + localOffset; //Move the stick 
         OnStickValueUpdated?.Invoke(DistanceMovedInput); //Trigger the event and passing DistanceMovedInput as the argument
-        bWasDragging = true;
+        AimWasDragged = true;
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         BackgroundTrans.position = eventData.position;
         ThumbStickTrans.position = eventData.position;
-        bWasDragging = false;
-    } //Move the whole block to where i placed my finger
+        AimWasDragged = false;
+    } // Move the whole block to where i placed my finger
 
     public void OnPointerUp(PointerEventData eventData)
     {
         BackgroundTrans.position = CenterTrans.position;
         ThumbStickTrans.position = BackgroundTrans.position; // Get the block position back to it's initial position
-        OnStickValueUpdated?.Invoke(Vector2.zero); //Trigger the event and passing ... as the argument
-        //we are tabing the screen to switch the weapon(not dragging)
-        if (!bWasDragging)
+        OnStickValueUpdated?.Invoke(Vector2.zero); // Trigger the event and passing ... as the argument
+        if (!AimWasDragged) // We're tapping on the Aim-Stick
         {
             onStickTaped?.Invoke();
         }
