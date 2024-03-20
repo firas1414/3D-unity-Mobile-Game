@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] float  turnSpeed = 30f;
     [Header("Inventory")]
     [SerializeField] InventoryComponent inventoryComponent;
+    //test comment
     
     Vector2 moveStickUpdated; // MoveStick value
     Vector2 aimInput;
