@@ -12,7 +12,6 @@ public class Player : MonoBehaviour
     [SerializeField] float  turnSpeed = 30f;
     [Header("Inventory")]
     [SerializeField] InventoryComponent inventoryComponent;
-    //test comment
     
     Vector2 moveStickUpdated; // MoveStick value
     Vector2 aimInput;
@@ -79,8 +78,8 @@ public class Player : MonoBehaviour
         // change animation based on MoveDirection (MoveDir)
         //when we aim we use the aim direction to set the animation not the move direction
         //how much we are moving forward and right (back= forward -1) (calculatated via DOT product) 
-        float forward = Vector3.Dot(MoveDir,transform.forward);
-        float right = Vector3.Dot(MoveDir,transform.right);
+        float forward = Vector3.Dot(MoveDir,transform.forward); // How much we are moving forward(z_axis)
+        float right = Vector3.Dot(MoveDir,transform.right); // How much we are moving right(x_axis)
         animator.SetFloat("forwardSpeed",forward);
         animator.SetFloat("rightSpeed",right);
         
