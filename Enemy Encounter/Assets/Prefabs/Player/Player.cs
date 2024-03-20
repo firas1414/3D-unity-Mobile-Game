@@ -10,7 +10,6 @@ public class Player : MonoBehaviour
     [SerializeField] CameraController cameraController; 
     [SerializeField] float moveSpeed = 20f;
     [SerializeField] float  turnSpeed = 30f;
-    [SerializeField] float  AnimturnSpeed = 30f;
     [Header("Inventory")]
     [SerializeField] InventoryComponent inventoryComponent;
     
@@ -43,24 +42,11 @@ public class Player : MonoBehaviour
         moveStickUpdated = inputValue;
     }
 
-
-    public void AttackPoint(){
-        inventoryComponent.GetActiveWeapon().Attack();
-    }
-
-
-    void StartSwitchWeapon(){
-        animator.SetTrigger("switchWeapon");
-    }
-    public void SwitchWeapon(){
-        inventoryComponent.NextWeapon();
-    }
-
     //turn the 2D direction to 3D direction (calculation)
     Vector3 StickInputToWorldDirection (Vector2 inputValue) {
-        Vector3 x_axis = mainCam.transform.right;
-        Vector3 z_axis = Vector3.Cross(x_axis, Vector3.up);
-        return x_axis * inputValue.x + z_axis * inputValue.y ; //convert the input to the world direction
+        Vector3 X_camera = mainCam.transform.right;
+        Vector3 Forward_camera = Vector3.Cross(X_camera, Vector3.up);
+        return X_camera * inputValue.x + Forward_camera * inputValue.y ; // Get Move Direction based on Camera direction
         
     }
 
@@ -87,8 +73,8 @@ public class Player : MonoBehaviour
 // make this function just to clear the code
     private void PerformMoveAndAim(){
         Vector3 MoveDir= StickInputToWorldDirection(moveStickUpdated) ; // Get the move direction
-        characterController.Move(MoveDir* Time.deltaTime * moveSpeed); // Move the character
-        UpdateAim(MoveDir);
+        characterController.Move(MoveDir* Time.deltaTime * moveSpeed); // Move
+        UpdateAim(MoveDir); // Aim
         
         // change animation based on MoveDirection (MoveDir)
         //when we aim we use the aim direction to set the animation not the move direction
@@ -109,7 +95,7 @@ public class Player : MonoBehaviour
         RotationTowards(AimDir);
     }
 
-    private void UpdateCamera(){
+    private void UpdateCamera(){ // Turn the camera with the player
         // don't update camera direction while aiming (if the player move and don't aim)
         if (moveStickUpdated.magnitude != 0 && aimInput.magnitude == 0 && cameraController != null) 
         {
@@ -118,37 +104,29 @@ public class Player : MonoBehaviour
     }
 
     private void RotationTowards(Vector3 AimDir){
-        // go back to 0 if we are not aiming
-        float currentTurnSpeed=0;
-        if(AimDir.magnitude != 0){
-            //save previous rotation to calculate rotationsped
-            Quaternion prevRot = transform.rotation ; // The transform.rotation represents the rotation of the GameObject this script is attached to
+        if(AimDir.magnitude != 0) // We are either aiming, or moving
+        { 
             /*
             This code aims to smoothly animate the player's rotation when transitioning from looking up to looking down,
             and allows the player to aim independently of their movement direction, particularly when attacked by enemies.
             */
             float turnLerpAlpha = turnSpeed* Time.deltaTime; // turnLerpAlpha is a value used to determine the rate of rotation of the character towards the direction it wants to face
             transform.rotation = Quaternion.Lerp( transform.rotation,Quaternion.LookRotation(AimDir,Vector3.up), turnLerpAlpha);
-            // This line of code smoothly rotates the character's current rotation towards a desired direction specified by AimDir using linear interpolation,
-            // ensuring a gradual and fluid rotation.
-            Quaternion currentRot = transform.rotation;
-            //figure out the direction
-            float direction;
-            if (Vector3.Dot(AimDir, transform.right) > 0) // If the direction is closer to my right
-            {
-                direction = 1;
-            } else // If the direction is closer to my left
-            {
-                direction = -1;
-            }
-            // diffrence between current rotation and the prev one (use Quaternion with mem variables)
-            float rotaionDelta = Quaternion.Angle(prevRot,currentRot) * direction;
-            currentTurnSpeed=rotaionDelta / Time.deltaTime;
-            }
+            // This line of code smoothly rotates the character's current rotation towards a desired direction specified by AimDir using linear interpolation
+        }
+    }
+    
+    
+    public void AttackPoint(){
+        inventoryComponent.GetActiveWeapon().Attack();
+    }
 
-           // lerp this value because the turn speed is high and the player start chaking
-           animatorTurnSpeed = Mathf.Lerp(animatorTurnSpeed,currentTurnSpeed , Time.deltaTime * AnimturnSpeed );
-           animator.SetFloat("turnSpeed",animatorTurnSpeed );
+
+    void StartSwitchWeapon(){
+        animator.SetTrigger("switchWeapon");
+    }
+    public void SwitchWeapon(){
+        inventoryComponent.NextWeapon();
     }
     
         
