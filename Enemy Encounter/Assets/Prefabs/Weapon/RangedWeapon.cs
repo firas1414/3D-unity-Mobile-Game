@@ -19,7 +19,7 @@ public class RangedWeapon : Weapon
         if (bulletVfx != null)
         {
             var emission = bulletVfx.emission;
-            bulletVfx.Emit(emission.GetBurst(0).maxCount);
+            bulletVfx.Emit(bulletVfx.emission.GetBurst(0).maxCount);
             
         }
         bulletVfx.transform.rotation = Quaternion.LookRotation(aimDir);
