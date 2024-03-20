@@ -111,7 +111,6 @@ MonoBehaviour:
   cameraController: {fileID: 0}
   moveSpeed: 5
   turnSpeed: 8
-  AnimturnSpeed: 5
   inventoryComponent: {fileID: -5230607419354285200}
 --- !u!114 &-5230607419354285200
 MonoBehaviour:

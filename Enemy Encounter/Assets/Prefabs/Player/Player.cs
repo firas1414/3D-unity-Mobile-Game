@@ -42,11 +42,10 @@ public class Player : MonoBehaviour
         moveStickUpdated = inputValue;
     }
 
-    //turn the 2D direction to 3D direction (calculation)
     Vector3 StickInputToWorldDirection (Vector2 inputValue) {
         Vector3 X_camera = mainCam.transform.right;
         Vector3 Forward_camera = Vector3.Cross(X_camera, Vector3.up);
-        return X_camera * inputValue.x + Forward_camera * inputValue.y ; // Get Move Direction based on Camera direction
+        return X_camera * inputValue.x + Forward_camera * inputValue.y ; // Get Move Direction based on Camera direction (x,0,z)
         
     }
 
