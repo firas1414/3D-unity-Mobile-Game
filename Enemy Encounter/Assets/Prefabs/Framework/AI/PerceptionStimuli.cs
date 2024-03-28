@@ -7,7 +7,7 @@ public class PerceptionStimuli : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SenseComponent.RegisterStimuli(this);
+        SenseComponent.RegisterStimuli(this); // "this" is a stimuli
     }
 
     // Update is called once per frame

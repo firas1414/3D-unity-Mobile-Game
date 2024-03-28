@@ -4,15 +4,14 @@ using UnityEngine;
 
 public abstract class SenseComponent : MonoBehaviour
 {
-    static List<PerceptionStimuli> registeredStimulis = new List<PerceptionStimuli>();
+    static List<PerceptionStimuli> registeredStimulis = new List<PerceptionStimuli>(); // Static means that the list is the same for the whole class, and every instance will have that same list
     List<PerceptionStimuli> PerceivableStimulis = new List<PerceptionStimuli>();
 
     static public void RegisterStimuli(PerceptionStimuli stimuli)
     {
-        if(registeredStimulis.Contains(stimuli)){
-            return;
+        if(!registeredStimulis.Contains(stimuli)){
+            registeredStimulis.Add(stimuli);
         }
-        registeredStimulis.Add(stimuli);
     }
 
     static public void UnRegisterStimuli(PerceptionStimuli stimuli){
