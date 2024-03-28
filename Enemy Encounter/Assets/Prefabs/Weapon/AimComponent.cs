@@ -29,7 +29,7 @@ public class AimComponent : MonoBehaviour
 
         Vector3 GetAimDir(){ // This method calculates the aim direction.
             Vector3 muzzleDir = muzzle.forward; // .forward gives you the direction the object is facing.
-            Debug.Log("Muzzle Direction: " + muzzleDir);
+            // Debug.Log("Muzzle Direction: " + muzzleDir);
             return new Vector3(muzzleDir.x, 0f, muzzleDir.z).normalized; 
             /*
             This line creates a new Vector3 with the same X and Z components as muzzleDir but sets the Y component to 0.
