@@ -7,10 +7,10 @@ public abstract class SenseComponent : MonoBehaviour
     [SerializeField] float forgettingTime = 3f;
 
     static List<PerceptionStimuli> registeredStimulis = new List<PerceptionStimuli>(); // Static means that the list is the same for the whole class, and every instance will have that same list
-    List<PerceptionStimuli> PerceivableStimulis = new List<PerceptionStimuli>();
+    List<PerceptionStimuli> PerceivableStimulis = new List<PerceptionStimuli>(); // Stimuli that the enemy is currently sensing
     Dictionary<PerceptionStimuli, Coroutine> ForgettingRoutines = new Dictionary<PerceptionStimuli, Coroutine>();
 
-    public delegate void OnPerceptionUpdated(PerceptionStimuli stimuli, bool successfulySensed);
+    public delegate void OnPerceptionUpdated(PerceptionStimuli stimuli, bool successfulySensed); // successfulySensed=true if the enemy sensing, false if he lost track
     public event OnPerceptionUpdated onPerceptionUpdated;
 
     static public void RegisterStimuli(PerceptionStimuli stimuli)
@@ -31,25 +31,25 @@ public abstract class SenseComponent : MonoBehaviour
     void Update()
     {
         foreach(var stimuli in registeredStimulis){
-            if(IsStimuliSensable(stimuli)){
-                if(!PerceivableStimulis.Contains(stimuli)){ // The object just sensed the player
+            if(IsStimuliSensable(stimuli)){ // The enemy is sensing the player
+                if(!PerceivableStimulis.Contains(stimuli)){ // This if is used to not keeping adding the stimuli again and again when the player is sensing him
                     PerceivableStimulis.Add(stimuli);
-                    if(ForgettingRoutines.TryGetValue(stimuli, out Coroutine routine)) // If there is already a routine going on, stop it because the enemmy sensed
+                    if(ForgettingRoutines.TryGetValue(stimuli, out Coroutine routine)) // If there is already a routine going on, stop it because the enemmy sensed again
                     {
                         StopCoroutine(routine);
                         ForgettingRoutines.Remove(stimuli);
                         Debug.Log($"I sensed{stimuli.gameObject}");
                     }
-                    else // If there is not a routine...
+                    else // If there is no routine, sense
                     {
                         onPerceptionUpdated?.Invoke(stimuli, true);
                         
                     }
                 }
             }
-            else{
+            else{ // The enemy lost sense but not track
                 if(PerceivableStimulis.Contains(stimuli)){
-                    PerceivableStimulis.Remove(stimuli); // The object lost sense
+                    PerceivableStimulis.Remove(stimuli); 
                     ForgettingRoutines.Add(stimuli, StartCoroutine(ForgetStimuli(stimuli))); // Started Forgetting routine
                     Debug.Log($"I lost sense{stimuli.gameObject}");
                 }
@@ -57,7 +57,7 @@ public abstract class SenseComponent : MonoBehaviour
         }
     }
 
-    IEnumerator ForgetStimuli(PerceptionStimuli stimuli)
+    IEnumerator ForgetStimuli(PerceptionStimuli stimuli) // if this coroutine eneded, the enemy lost track(lost sense completelty)
     {
         yield return new WaitForSeconds(forgettingTime);
         ForgettingRoutines.Remove(stimuli);
