@@ -38,7 +38,6 @@ public abstract class SenseComponent : MonoBehaviour
                     {
                         StopCoroutine(routine);
                         ForgettingRoutines.Remove(stimuli);
-                        Debug.Log($"I sensed{stimuli.gameObject}");
                     }
                     else // If there is no routine, sense
                     {

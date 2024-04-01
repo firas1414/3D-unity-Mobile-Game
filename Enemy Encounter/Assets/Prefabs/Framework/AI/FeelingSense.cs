@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AlwaysAware : SenseComponent
+public class FeelingSense : SenseComponent
 {
     [SerializeField] private float awareDistance = 2f;
     protected override bool IsStimuliSensable(PerceptionStimuli stimuli) // Checks if a particular stimuli is within the sensing range (awareDistance) of the AlwaysAware object
