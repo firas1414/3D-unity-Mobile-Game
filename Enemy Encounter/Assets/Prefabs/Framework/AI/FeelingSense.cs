@@ -5,7 +5,7 @@ using UnityEngine;
 public class FeelingSense : SenseComponent
 {
     [SerializeField] private float awareDistance = 2f;
-    protected override bool IsStimuliSensable(PerceptionStimuli stimuli) // Checks if a particular stimuli is within the sensing range (awareDistance) of the AlwaysAware object
+    protected override bool IsStimuliSensable(PerceptionStimuli stimuli) // Checks if a particular stimuli is within the sensing range (awareDistance) of the FeelingSense object
     {
         return Vector3.Distance(transform.position, stimuli.transform.position) <= awareDistance;
         /*

@@ -6,12 +6,12 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] HealthComponent healthComponent;
     [SerializeField] Animator animator;
-    [SerializeField] PerceptionComponent perceptionComp;
+    [SerializeField] PerceptionComponent perceptionComp; // This will be taking care of the enemy's all senses(Seing, Feeling)
 
     GameObject Target;
 
 
-    private void TakenDamge(float health , float amount , float maxHealth)
+    private void TakenDamge(float health , float amount , float maxHealth, GameObject Hitter)
     {
 
     }
@@ -43,12 +43,12 @@ public class Enemy : MonoBehaviour
 
     private void TargetChanged(GameObject target, bool sensed)
     {
-        if(sensed)
+        if(sensed) // The enemy have a target
         {
             Target = target;
             Debug.Log($"I sensed {Target}");
         }
-        else
+        else // The enemy does not have any targets
         {
             Target = null;
         }

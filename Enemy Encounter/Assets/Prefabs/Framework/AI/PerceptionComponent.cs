@@ -5,9 +5,11 @@ using UnityEngine;
 public class PerceptionComponent : MonoBehaviour
 {
     [SerializeField] SenseComponent[] senses;
+
     LinkedList<PerceptionStimuli> currentlyPerceivedStimulis = new LinkedList<PerceptionStimuli>();
+
     PerceptionStimuli targetStimuli;
-    public delegate void OnTargetChanged(GameObject target, bool sensed);
+    public delegate void OnTargetChanged(GameObject target, bool HaveTarget);
     public event OnTargetChanged onTargetChanged;
 
     // Start is called before the first frame update
@@ -27,34 +29,34 @@ public class PerceptionComponent : MonoBehaviour
         {
             if (nodeFound != null)
             {
-                currentlyPerceivedStimulis.AddAfter(nodeFound, stimuli);
+                currentlyPerceivedStimulis.AddAfter(nodeFound, stimuli); // Add the stimuli next to the that node because it's the same stimuli
             }
             else
             {
                 currentlyPerceivedStimulis.AddLast(stimuli);
             }
         }
-        else
-        {
-            currentlyPerceivedStimulis.Remove(nodeFound);
-        }
-        if(currentlyPerceivedStimulis.Count != 0)
-        {
-            PerceptionStimuli highestStimuli = currentlyPerceivedStimulis.First.Value;
-            if(targetStimuli == null || targetStimuli != highestStimuli)
-            {
-                targetStimuli = highestStimuli;
-                onTargetChanged?.Invoke(targetStimuli.gameObject, true);
-            }
-        }
-        else
-        {
-            if(targetStimuli != null)
-            {
-                onTargetChanged?.Invoke(targetStimuli.gameObject, false);
-                targetStimuli = null;
-            }
-        }
+       else // Lost track of that stimuli's sense
+       {
+           currentlyPerceivedStimulis.Remove(nodeFound);
+       }
+       if(currentlyPerceivedStimulis.Count != 0) // The enemy have track of at least one stimuli(player)
+       {
+           PerceptionStimuli highestStimuli = currentlyPerceivedStimulis.First.Value;
+           if(targetStimuli == null || targetStimuli != highestStimuli)
+           {                
+               targetStimuli = highestStimuli; // Updated the enemy's target
+               onTargetChanged?.Invoke(targetStimuli.gameObject, true);
+           }
+       }
+       else // The enemy does not have track of any stimuli's
+       {
+           if(targetStimuli != null)
+           {
+               onTargetChanged?.Invoke(targetStimuli.gameObject, false);
+               targetStimuli = null;
+           }
+       }
     }
 
 

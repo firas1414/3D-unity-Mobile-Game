@@ -49,7 +49,7 @@ public abstract class Weapon : MonoBehaviour
     public void DamageGameObject(GameObject objToDamage, float amt){
         HealthComponent healthComp = objToDamage.GetComponent<HealthComponent>();
         if(healthComp != null ){
-              healthComp.changeHealth(-amt);
+              healthComp.changeHealth(-amt, Owner);
         }
        
     }
