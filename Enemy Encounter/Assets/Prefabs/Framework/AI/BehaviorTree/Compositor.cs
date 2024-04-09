@@ -19,6 +19,10 @@ public abstract class Compositor : BTNode
         return NodeResult.InProgress ;
     }
 
+    protected BTNode GetCuurentChild(){
+        return currentChild.Value ;
+    }
+
     //Switch between Tasks
     protected bool Next(){
         
