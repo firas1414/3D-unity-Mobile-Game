@@ -9,6 +9,10 @@ public abstract class Compositor : BTNode
     //represent one task (item of the list)
     LinkedListNode<BTNode> currentChild = null;
 
+    //fill out the the comp with NODES(tasks)
+    public void AddChild (BTNode newChild){
+        children.AddLast(newChild);
+    }
     protected override NodeResult Execute(){
         //No multiTask
         if(children.Count == 0){

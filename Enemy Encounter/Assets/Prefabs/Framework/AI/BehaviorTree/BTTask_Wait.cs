@@ -23,7 +23,7 @@ public class BTTask_Wait : BTNode {
     protected override NodeResult Update() {
         timeElapsed += Time.deltaTime;
         if (timeElapsed >= WaitTime) {
-            Debug.Log($"Wait time finished for {timeElapsed}");
+            //Debug.Log($"Wait time finished for {timeElapsed}");
             return NodeResult.Success;
         }
         return NodeResult.InProgress;
