@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] HealthComponent healthComponent;
     [SerializeField] Animator animator;
     [SerializeField] PerceptionComponent perceptionComp; // This will be taking care of the enemy's all senses(Seing, Feeling)
-
+    [SerializeField] BehaviorTree behaviorTree;
     GameObject Target;
 
 
@@ -45,12 +45,12 @@ public class Enemy : MonoBehaviour
     {
         if(sensed) // The enemy have a target
         {
-            Target = target;
+            behaviorTree.Blackboard.SetOrAddData("Target", target);
             Debug.Log($"I sensed {Target}");
         }
         else // The enemy does not have any targets
         {
-            Target = null;
+            behaviorTree.Blackboard.RemoveBlackboardData("Target");
         }
     }
 
@@ -61,7 +61,7 @@ public class Enemy : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
-        if(Target != null)
+        if(behaviorTree && behaviorTree.Blackboard.GetBlackboardData("Target", out GameObject Target))
         {
             Vector3 drawTargetPos = Target.transform.position + Vector3.up;
             Gizmos.DrawWireSphere(drawTargetPos, 0.7f);
