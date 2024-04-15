@@ -15,7 +15,7 @@ public class BTTask_Wait : BTNode {
         if (WaitTime <= 0) {
             return NodeResult.Success;
         }
-        Debug.Log($"Wait started with duration: {WaitTime}");
+        Debug.Log($"Wait Started");
         timeElapsed = 0f;
         return NodeResult.InProgress;
     }
@@ -23,7 +23,7 @@ public class BTTask_Wait : BTNode {
     protected override NodeResult Update() {
         timeElapsed += Time.deltaTime;
         if (timeElapsed >= WaitTime) {
-            //Debug.Log($"Wait time finished for {timeElapsed}");
+            Debug.Log($"Wait Success");
             return NodeResult.Success;
         }
         return NodeResult.InProgress;

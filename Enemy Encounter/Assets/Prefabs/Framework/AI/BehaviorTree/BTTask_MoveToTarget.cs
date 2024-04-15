@@ -10,6 +10,8 @@ public class BTTask_MoveToTarget : BTNode
 	GameObject target;
 	float acceptableDistance = 2f;
 	BehaviorTree tree; // Specify which tree we're working with, since each enemy can have his own AI Behavior Tree
+
+
 	public BTTask_MoveToTarget(BehaviorTree tree, string targetKey, float acceptableDistance = 2f)
 	{
 		this.tree = tree;

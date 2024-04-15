@@ -9,7 +9,7 @@ public abstract class Compositor : BTNode
     //represent one task (item of the list)
     LinkedListNode<BTNode> currentChild = null;
 
-    //fill out the the comp with NODES(tasks)
+    // Add the childrens
     public void AddChild (BTNode newChild){
         children.AddLast(newChild);
     }
@@ -19,7 +19,7 @@ public abstract class Compositor : BTNode
             return NodeResult.Success;
         }
 
-        currentChild = children.First;
+        currentChild = children.First; // Always start with the first children
         return NodeResult.InProgress ;
     }
 
@@ -38,6 +38,6 @@ public abstract class Compositor : BTNode
     }
 
     protected override void End(){
-        currentChild=null;
+        // currentChild=null;
     }
 }

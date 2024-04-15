@@ -7,13 +7,14 @@ public class Sequencer : Compositor
 {
     protected override NodeResult Update() // This will return not the state of the node, but the state of the whole Sequencer
     {
-        NodeResult result =GetCurrentChild().UpdateNode();
+
+        NodeResult result = GetCurrentChild().UpdateNode();
 
         if (result == NodeResult.Failure)
         {
             return NodeResult.Failure; // If any child fails, the sequence fails
         }
-        else if (result == NodeResult.Success)
+        if (result == NodeResult.Success)
         {
             if (Next())
             {
