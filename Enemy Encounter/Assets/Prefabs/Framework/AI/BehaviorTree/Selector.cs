@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Selector : Compositor
 {
-    protected override NodeResult Update()
+    protected override NodeResult Update() // This will return not the state of the node, but the state of the whole Selector
     {
-        NodeResult result = GetCuurentChild().UpdateNode();
+        NodeResult result = GetCurrentChild().UpdateNode();
 
         // We need just one child to be successful (task approved)
         if (result == NodeResult.Success)

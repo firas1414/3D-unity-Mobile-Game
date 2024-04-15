@@ -23,7 +23,7 @@ public abstract class Compositor : BTNode
         return NodeResult.InProgress ;
     }
 
-    protected BTNode GetCuurentChild(){
+    protected BTNode GetCurrentChild(){
         return currentChild.Value ;
     }
 

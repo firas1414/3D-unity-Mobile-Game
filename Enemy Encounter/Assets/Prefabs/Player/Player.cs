@@ -82,14 +82,14 @@ public class Player : MonoBehaviour
         float right = Vector3.Dot(MoveDir,transform.right); // How much we are moving right(x_axis)
         animator.SetFloat("forwardSpeed",forward);
         animator.SetFloat("rightSpeed",right);
-        
+        characterController.Move(Vector3.down * Time.deltaTime * 10f); // Force the player to all be on the ground
 
     }
 
     private void  UpdateAim(Vector3 currentMoveDir){
         Vector3 AimDir= currentMoveDir ; // Get the aim direction(which is the same as move direction if the player is not aiming)
         if(aimInput.magnitude != 0){ // Check if the player is aimnig: true->Aim diretion = AimStick Direction      False->Aim direction = MoveStick Direction
-            AimDir= StickInputToWorldDirection(aimInput);
+            AimDir = StickInputToWorldDirection(aimInput);
         }
         RotationTowards(AimDir);
     }

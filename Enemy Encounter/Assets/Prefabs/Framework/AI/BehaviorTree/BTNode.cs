@@ -10,18 +10,22 @@ public enum NodeResult {
 }
 
 public abstract class BTNode {
-    // Update the node 
-    public NodeResult UpdateNode() {
+
+
+    private bool started = false;
+
+
+    public NodeResult UpdateNode() { // This gonna be called each frame
         // One-off thing task (just one step)
         if (!started) {
             started = true;
-            NodeResult execResult = Execute();
-            if (execResult != NodeResult.InProgress) {
+            NodeResult execResult = Execute(); // Execute the node and get the result
+            if (execResult != NodeResult.InProgress) { // Failure or Success(completed)
                 EndNode();
                 return execResult;
             }
         }
-        // Time-based tasks (multi-steps or based on conditions)
+        // Time-based tasks (multi-steps or based on conditions) - The Execution of the node is still in progress
         return Update();
     }
 
@@ -32,18 +36,17 @@ public abstract class BTNode {
     }
 
     protected virtual NodeResult Update() {
-        // Time-based tasks
+        // Time-based tasks(tasks that takes time to be finished and just done instantly)
         return NodeResult.Success;
     }
     
-    protected virtual void End(){
-        //clean up (reset)
-    }
-
-    protected virtual void EndNode() {
+    protected virtual void EndNode()
+    {
         started = false;
         End();
     }
 
-    private bool started = false;
+    protected virtual void End(){
+        //clean up (reset)
+    }
 }

@@ -5,9 +5,9 @@ using UnityEngine;
 // Go from right to left will be successful if every child is executed successfully (one node fails the entire sequence fails)
 public class Sequencer : Compositor
 {
-    protected override NodeResult Update()
+    protected override NodeResult Update() // This will return not the state of the node, but the state of the whole Sequencer
     {
-        NodeResult result =GetCuurentChild().UpdateNode();
+        NodeResult result =GetCurrentChild().UpdateNode();
 
         if (result == NodeResult.Failure)
         {

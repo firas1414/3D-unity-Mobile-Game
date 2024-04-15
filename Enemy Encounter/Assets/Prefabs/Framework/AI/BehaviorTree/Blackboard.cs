@@ -29,11 +29,15 @@ public class Blackboard
 		}
 		return false;
 	}
+
+
 	public void RemoveBlackboardData(string key)
 	{
 		blackboardData.Remove(key);
 		onBlackboardValueChanged?.Invoke(key, null);
 	}
+
+
 	public bool HasKey(string key)
 	{
 		return blackboardData.ContainsKey(key);
