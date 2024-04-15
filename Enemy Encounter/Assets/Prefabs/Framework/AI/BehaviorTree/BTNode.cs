@@ -26,6 +26,11 @@ public abstract class BTNode {
             }
         }
         // Time-based tasks (multi-steps or based on conditions) - The Execution of the node is still in progress
+        NodeResult updateResult = Update();
+        if(updateResult != NodeResult.InProgress)
+        {
+            EndNode();
+        }
         return Update();
     }
 

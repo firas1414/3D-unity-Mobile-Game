@@ -9,7 +9,7 @@ public class BTTask_MoveToTarget : BTNode
 	string targetKey;
 	GameObject target;
 	float acceptableDistance = 2f;
-	BehaviorTree tree;
+	BehaviorTree tree; // Specify which tree we're working with, since each enemy can have his own AI Behavior Tree
 	public BTTask_MoveToTarget(BehaviorTree tree, string targetKey, float acceptableDistance = 2f)
 	{
 		this.tree = tree;
@@ -19,21 +19,20 @@ public class BTTask_MoveToTarget : BTNode
 	protected override NodeResult Execute()
 	{
 		Blackboard blackboard = tree.Blackboard;
-		if(blackboard == null || !blackboard.GetBlackboardData(targetKey, out target))
+		blackboard.onBlackboardValueChanged += BlackboardValueChanged;
+		if(blackboard == null || !blackboard.GetBlackboardData(targetKey, out target)) // In case the target not sensed
 		{
 			return NodeResult.Failure;
 		}
-		agent = tree.GetComponent<NavMeshAgent>();
-		if(agent == null)
+		agent = tree.GetComponent<NavMeshAgent>(); // Refernce for the NavMeshAgent
+		if(agent == null) // In case we don't have the agent, but most likely we have it
 		{
 			return NodeResult.Failure;
 		}
-		if(IsTargetInAcceptableDistance())
+		if(IsTargetInAcceptableDistance()) // Check if the AI Agent reached the max distance allowed between him and the target
 		{
 			return NodeResult.Success;
 		}
-
-		blackboard.onBlackboardValueChanged += BlackboardValueChanged;
 
 		agent.SetDestination(target.transform.position);
 		agent.isStopped = false;
@@ -50,6 +49,7 @@ public class BTTask_MoveToTarget : BTNode
 
 	protected override NodeResult Update()
 	{
+
 		if(target == null)
 		{
 			agent.isStopped = true;

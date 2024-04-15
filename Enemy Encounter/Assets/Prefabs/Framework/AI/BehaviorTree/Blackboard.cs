@@ -19,7 +19,7 @@ public class Blackboard
 		}
 		onBlackboardValueChanged?.Invoke(key, val); // Transmit the changed data to other components
 	}
-	public bool GetBlackboardData<T>(string key, out T val) //****************REVIEWWWWWWW
+	public bool GetBlackboardData<T>(string key, out T val) // Return true if we have a sensed target, and false if not.
 	{
 		val = default(T);
 		if(blackboardData.ContainsKey(key))
