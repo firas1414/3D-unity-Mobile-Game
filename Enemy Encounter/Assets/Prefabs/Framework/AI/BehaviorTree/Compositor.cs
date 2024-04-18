@@ -38,8 +38,12 @@ public abstract class Compositor : BTNode
     }
 
     protected override void End(){
+        //if(currentChild == null)
+        {
+            return;
+        }
         currentChild.Value.Abort();
-        // currentChild=null;
+        //currentChild=null;
     }
 
     public override void SortPriority(ref int priorityCounter)

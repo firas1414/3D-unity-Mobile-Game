@@ -13,7 +13,7 @@ public abstract class BTNode {
 
 
     private bool started = false;
-    int priority
+    int priority;
 
 
     public int GetPriority()
@@ -24,6 +24,7 @@ public abstract class BTNode {
     public virtual void SortPriority(ref int priorityCounter)
     {
         priority = priorityCounter++;
+        Debug.Log($"{this} has priority {priority}");
     }
 
     public NodeResult UpdateNode() { // This gonna be called each frame

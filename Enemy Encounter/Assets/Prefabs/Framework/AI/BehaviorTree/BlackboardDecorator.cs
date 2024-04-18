@@ -18,7 +18,7 @@ public class BlackboardDecorator : Decorator // This will be reacting to blacboa
 	{
 		RunConditionChange, // Means AI should always monitor the abscence or existence of a certain value
 		KeyValueChange // Means AI should always monitor the changes made to key value
-
+	}
 
 	// This is designed to tell the AI what to do after being Notified about the change(it's time tointerupt something)')
 	public enum NotifyAbort
@@ -38,7 +38,7 @@ public class BlackboardDecorator : Decorator // This will be reacting to blacboa
 	NotifyAbort notifyAbort;
 
 
-	public BlackboardDecorator(BTNode child, BehaviorTree tree, string key, RunCondition runCondition, NotifyRule notifyRule, NotifyAbort notifyAbort) : base(child)
+	public BlackboardDecorator(BehaviorTree tree,BTNode child,string key, RunCondition runCondition, NotifyRule notifyRule, NotifyAbort notifyAbort) : base(child)
 	{
 		this.tree = tree;
 		this.key = key;
@@ -106,19 +106,19 @@ public class BlackboardDecorator : Decorator // This will be reacting to blacboa
 
 	private void Notify()
 	{
-		if(notifyAbort == none)
+		if(notifyAbort == NotifyAbort.none)
 		{
 
 		}
-		else if(notifyAbort == self)
+		else if(notifyAbort == NotifyAbort.self)
 		{
 			AbortSelf();
 		}
-		else if(notifyAbort == lower)
+		else if(notifyAbort == NotifyAbort.lower)
 		{
 			AbortLower();
 		}
-		else if(notifyAbort == both)
+		else if(notifyAbort == NotifyAbort.both)
 		{
 			AbortBoth();
 		}
