@@ -38,6 +38,17 @@ public abstract class Compositor : BTNode
     }
 
     protected override void End(){
+        currentChild.Value.Abort();
         // currentChild=null;
     }
+
+    public override void SortPriority(ref int priorityCounter)
+	{
+		base.SortPriority(ref priorityCounter);
+        foreach(var child in children)
+        {
+            child.SortPriority(ref priorityCounter);
+        }
+		
+	}
 }

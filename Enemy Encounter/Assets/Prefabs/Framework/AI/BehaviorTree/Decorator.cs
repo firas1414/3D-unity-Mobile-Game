@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Decorator : BTNode
 {
-	BTNode child;
+	BTNode child; // This is the node that we will running conditions on him, and any changed will be made to this child
 	protected BTNode GetChild()
 	{
 		return child; 
@@ -13,4 +13,10 @@ public abstract class Decorator : BTNode
 	 {
 		 this.child = child;
 	 }
+
+	public override void SortPriority(ref int priorityCounter)
+	{
+		base.SortPriority(ref priorityCounter);
+		child.SortPriority(ref priorityCounter);
+	}
 }

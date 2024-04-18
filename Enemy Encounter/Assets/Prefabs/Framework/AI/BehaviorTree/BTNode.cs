@@ -13,7 +13,18 @@ public abstract class BTNode {
 
 
     private bool started = false;
+    int priority
 
+
+    public int GetPriority()
+    {
+        return priority;
+    }
+
+    public virtual void SortPriority(ref int priorityCounter)
+    {
+        priority = priorityCounter++;
+    }
 
     public NodeResult UpdateNode() { // This gonna be called each frame
         // One-off thing task (just one step)
@@ -53,5 +64,10 @@ public abstract class BTNode {
 
     protected virtual void End(){
         //clean up (reset)
+    }
+
+    public void Abort()
+    {
+        EndNode();
     }
 }
