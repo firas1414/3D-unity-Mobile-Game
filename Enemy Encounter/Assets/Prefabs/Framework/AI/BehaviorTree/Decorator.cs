@@ -19,4 +19,9 @@ public abstract class Decorator : BTNode
 		base.SortPriority(ref priorityCounter);
 		child.SortPriority(ref priorityCounter);
 	}
+
+	public override BTNode Get()
+    {
+		return child.Get();
+    }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BTTask_Wait : BTNode {
-    float WaitTime = 2f;
+    float WaitTime;
     float timeElapsed = 0f;
     
     // Constructor
@@ -15,7 +15,7 @@ public class BTTask_Wait : BTNode {
         if (WaitTime <= 0) {
             return NodeResult.Success;
         }
-        Debug.Log($"Wait Started");
+        //Debug.Log($"Wait Started");
         timeElapsed = 0f;
         return NodeResult.InProgress;
     }
@@ -23,7 +23,7 @@ public class BTTask_Wait : BTNode {
     protected override NodeResult Update() {
         timeElapsed += Time.deltaTime;
         if (timeElapsed >= WaitTime) {
-            Debug.Log($"Wait Success");
+            //Debug.Log($"Wait Finished");
             return NodeResult.Success;
         }
         return NodeResult.InProgress;

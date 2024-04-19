@@ -20,7 +20,7 @@ public class BTTask_GetNextPatrolPoint : BTNode
 	{
 		if(patrollingComponent != null && patrollingComponent.GetNextPatrolPoint(out Vector3 point))
 		{
-			Debug.Log($"Got the next");
+			//Debug.Log($"Got the next");
 			tree.Blackboard.SetOrAddData(patrolPointKey, point); // We consistently maintain a key named 'Patrol Point,' with its value dynamically updating to reflect the position of the current patrol point.
 			return NodeResult.Success;
 		}

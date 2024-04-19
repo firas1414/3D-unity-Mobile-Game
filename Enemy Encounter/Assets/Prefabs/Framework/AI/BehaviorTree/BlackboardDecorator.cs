@@ -80,6 +80,11 @@ public class BlackboardDecorator : Decorator // This will be reacting to blacboa
 		return false;
 	}
 
+	protected override NodeResult Update()
+	{
+		return GetChild().UpdateNode(); // We started executing the child because the condition is met 
+	}
+
 	private void CheckNotify(string key, object val)
 	{
 		if(this.key != key) // The change didn't happen to the key that concerns us
@@ -132,16 +137,12 @@ public class BlackboardDecorator : Decorator // This will be reacting to blacboa
 
 	private void AbortLower()
 	{
+		tree.AbortLowerThan(GetPriority());
 	}
 
 	private void AbortSelf()
 	{
 		Abort();
-	}
-
-	protected override NodeResult Update()
-	{
-		return GetChild().UpdateNode();
 	}
 
 	protected override void End()

@@ -35,6 +35,7 @@ public class BTTask_MoveToLoc : BTNode
 		{
 			return NodeResult.Success;
 		}
+		//Debug.Log($"Moving");
 		agent.SetDestination(location);
 		agent.isStopped = false;
 		return NodeResult.InProgress;
@@ -46,7 +47,7 @@ public class BTTask_MoveToLoc : BTNode
 		if(IsLoactionInAcceptableDistance())
 		{
 			agent.isStopped = true;
-			Debug.Log($"Moved");
+			//Debug.Log($"Moved");
 			return NodeResult.Success;
 		}
 		return NodeResult.InProgress;
@@ -56,5 +57,11 @@ public class BTTask_MoveToLoc : BTNode
 	private bool IsLoactionInAcceptableDistance()
 	{
 		return Vector3.Distance(location, tree.transform.position) <= acceptableDistance;
+	}
+
+	protected override void End()
+	{
+		agent.isStopped = true;
+		base.End();
 	}
 }

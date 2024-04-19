@@ -13,7 +13,7 @@ public abstract class BTNode {
 
 
     private bool started = false;
-    int priority;
+    int priority; // Each node will have a priority, the lower the priority value, the higher the priority
 
 
     public int GetPriority()
@@ -32,18 +32,18 @@ public abstract class BTNode {
         if (!started) {
             started = true;
             NodeResult execResult = Execute(); // Execute the node and get the result
-            if (execResult != NodeResult.InProgress) { // Failure or Success(completed)
+            if (execResult != NodeResult.InProgress) { // Tasks
                 EndNode();
                 return execResult;
             }
         }
         // Time-based tasks (multi-steps or based on conditions) - The Execution of the node is still in progress
         NodeResult updateResult = Update();
-        if(updateResult != NodeResult.InProgress)
+        if(updateResult != NodeResult.InProgress) // If after updated the node is finished hi execution(for example: Sequencer, Selector,Compositor,BlackboardDecorator)
         {
             EndNode();
         }
-        return Update();
+        return Update(); // for example: Sequencer, Selector,Compositor,BlackboardDecorator
     }
 
     // Functions to override in child classes
@@ -70,5 +70,10 @@ public abstract class BTNode {
     public void Abort()
     {
         EndNode();
+    }
+
+    public virtual BTNode Get()
+    {
+        return this;
     }
 }

@@ -7,7 +7,7 @@ public abstract class Compositor : BTNode
     //list of the tasks(nodes)
     LinkedList<BTNode> children = new LinkedList<BTNode>();
     //represent one task (item of the list)
-    LinkedListNode<BTNode> currentChild = null;
+    public LinkedListNode<BTNode> currentChild = null;
 
     // Add the childrens
     public void AddChild (BTNode newChild){
@@ -24,7 +24,7 @@ public abstract class Compositor : BTNode
     }
 
     protected BTNode GetCurrentChild(){
-        return currentChild.Value ;
+        return currentChild.Value;
     }
 
     //Switch between Tasks
@@ -38,21 +38,37 @@ public abstract class Compositor : BTNode
     }
 
     protected override void End(){
-        //if(currentChild == null)
+        if(currentChild == null)
         {
             return;
         }
         currentChild.Value.Abort();
-        //currentChild=null;
+        currentChild = null;
     }
 
     public override void SortPriority(ref int priorityCounter)
 	{
-		base.SortPriority(ref priorityCounter);
-        foreach(var child in children)
+		base.SortPriority(ref priorityCounter); // Assign priority to the Compositor
+        foreach(var child in children) // // Assign priority to the Compositor's children
         {
             child.SortPriority(ref priorityCounter);
         }
 		
 	}
+
+    public override BTNode Get()
+    {
+        if(currentChild == null)
+        {
+            if(children.Count != 0)
+            {
+                return children.First.Value.Get();
+            }
+            else
+            {
+                return this;
+            }
+        }
+        return currentChild.Value.Get();
+    }
 }

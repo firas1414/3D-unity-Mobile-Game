@@ -20,7 +20,7 @@ public class ChomperBehavior : BehaviorTree {
         Sequencer patrollingSeq = new Sequencer(); // Patrolling Part
         BTTask_GetNextPatrolPoint getNextPatrolPoint = new BTTask_GetNextPatrolPoint(this, "PatrolPoint");
         BTTask_MoveToLoc moveToPatrolPoint = new BTTask_MoveToLoc(this, "PatrolPoint", 3f);
-        BTTask_Wait waitAtPatrolPoint = new BTTask_Wait(2f);
+        BTTask_Wait waitAtPatrolPoint = new BTTask_Wait(4f);
 
         patrollingSeq.AddChild(getNextPatrolPoint);
         patrollingSeq.AddChild(moveToPatrolPoint);

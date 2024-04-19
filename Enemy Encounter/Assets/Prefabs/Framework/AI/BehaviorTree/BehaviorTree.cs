@@ -6,6 +6,7 @@ public abstract class BehaviorTree : MonoBehaviour
 {
     BTNode Root; // Our behavior tree have a root node
     Blackboard blackboard = new Blackboard(); // Our behavior tree have a blackboard
+    BTNode prevNode;
 
 
     public Blackboard Blackboard // Of course our behavior tree also has to let us have access to the blackboard at any time we want, that's the purpose of this method'
@@ -35,5 +36,21 @@ public abstract class BehaviorTree : MonoBehaviour
         what's going to be updated exactly is the state of each node in the behavior tree.
         This could involve evaluating conditions, executing actions, or transitioning between nodes based on the current state of the game or the AI.
         */
+        BTNode currentNode = Root.Get();
+        if(prevNode !=  currentNode)
+        {   
+            prevNode = currentNode;
+            Debug.Log($"current node prevNode changed to: {currentNode}");
+        }
+    }
+
+    public void AbortLowerThan(int priority)
+    {
+        BTNode currentNode = Root.Get();
+
+        if(currentNode.GetPriority() > priority)
+        {
+            Root.Abort();
+        }
     }
 }
