@@ -8,8 +8,9 @@ public class Player : MonoBehaviour
     [SerializeField] JoyStick aimStick;
     [SerializeField] CharacterController characterController;
     [SerializeField] CameraController cameraController; 
+    [SerializeField] float animTurnSpeed;
     [SerializeField] float moveSpeed = 20f;
-    [SerializeField] float  turnSpeed = 30f;
+    [SerializeField] MovementComponent  movementComponent;
     [Header("Inventory")]
     [SerializeField] InventoryComponent inventoryComponent;
     
@@ -17,7 +18,6 @@ public class Player : MonoBehaviour
     Vector2 aimInput;
     Camera mainCam;
     Animator animator ;
-    float animatorTurnSpeed;
 
 
     // Start is called before the first frame update
@@ -102,19 +102,13 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void RotationTowards(Vector3 AimDir){
-        if(AimDir.magnitude != 0) // We are either aiming, or moving
-        { 
-            /*
-            This code aims to smoothly animate the player's rotation when transitioning from looking up to looking down,
-            and allows the player to aim independently of their movement direction, particularly when attacked by enemies.
-            */
-            float turnLerpAlpha = turnSpeed* Time.deltaTime; // turnLerpAlpha is a value used to determine the rate of rotation of the character towards the direction it wants to face
-            transform.rotation = Quaternion.Lerp( transform.rotation,Quaternion.LookRotation(AimDir,Vector3.up), turnLerpAlpha);
-            // This line of code smoothly rotates the character's current rotation towards a desired direction specified by AimDir using linear interpolation
-        }
+    private void RotationTowards(Vector3 AimDir)
+    {
+        float currentTrunSpeed = movementComponent.RotationTowards(AimDir);
+        animTurnSpeed = Mathf.Lerp(animTurnSpeed, currentTrunSpeed, Time.deltaTime * animTurnSpeed);
+
+        animator.SetFloat("turnSpeed", animTurnSpeed);
     }
-    
     
     public void AttackPoint(){
         inventoryComponent.GetActiveWeapon().Attack();

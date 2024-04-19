@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, BehaviorTreeInterface
 {
     [SerializeField] HealthComponent healthComponent;
     [SerializeField] Animator animator;
     [SerializeField] PerceptionComponent perceptionComp; // This will be taking care of the enemy's all senses(Seing, Feeling)
     [SerializeField] BehaviorTree behaviorTree;
+    [SerializeField] MovementComponent movementComponent;
     GameObject Target;
 
 
@@ -69,5 +70,14 @@ public class Enemy : MonoBehaviour
             Gizmos.color = Color.red;
             Gizmos.DrawLine(transform.position + Vector3.up, drawTargetPos);
         }
+    }
+
+    public void RotationTowards(GameObject target, bool verticalAim = false)
+    {
+        Vector3 AimDir = target.transform.position - transform.position;
+        AimDir.y = verticalAim ? AimDir.y : 0;
+        AimDir = AimDir.normalized;
+        if(verticalAim)
+        movementComponent.RotationTowards(AimDir);
     }
 }

@@ -6,6 +6,7 @@ public abstract class BehaviorTree : MonoBehaviour
 {
     BTNode Root; // Our behavior tree have a root node
     Blackboard blackboard = new Blackboard(); // Our behavior tree have a blackboard
+    BehaviorTreeInterface behaviorTreeInterface;
     BTNode prevNode;
 
 
@@ -23,6 +24,7 @@ public abstract class BehaviorTree : MonoBehaviour
 
     private void SortTree()
     {
+        behaviorTreeInterface = GetComponent<BehaviorTreeInterface>();
         int priorityCounter = 0;
         Root.SortPriority(ref priorityCounter);
     }
