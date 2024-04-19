@@ -6,14 +6,14 @@ using UnityEngine;
 public class Sequencer : Compositor
 {
     protected override NodeResult Update() // This will return not the state of the node, but the state of the whole Sequencer
-    {if(currentChild != null)
+    {if(currentChild?.Value != null)
     {
         NodeResult result = GetCurrentChild().UpdateNode();
-        if (result!=null && result == NodeResult.Failure)
+        if (result == NodeResult.Failure)
         {
             return NodeResult.Failure; // If any child fails, the sequence fails
         }
-        if (result!=null && result == NodeResult.Success)
+        if (result == NodeResult.Success)
         {
             if (Next())
             {

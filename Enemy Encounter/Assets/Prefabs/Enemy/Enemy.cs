@@ -50,6 +50,7 @@ public class Enemy : MonoBehaviour
         }
         else // The enemy does not have any targets
         {
+            behaviorTree.Blackboard.SetOrAddData("LastSeenLoc", target.transform.position); // Add data about thelast seen location
             behaviorTree.Blackboard.RemoveBlackboardData("Target");
         }
     }

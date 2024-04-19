@@ -5,7 +5,7 @@ using UnityEngine;
 public class ChomperBehavior : BehaviorTree {
     
     protected override void ConstructTree(out BTNode rootNode) {
-
+        // SeePlayer?
         Selector RootSelector = new Selector();
         Sequencer attackTargetSequencer = new Sequencer();
         BTTask_MoveToTarget moveToTarget = new BTTask_MoveToTarget(this, "Target", 2f);
@@ -16,6 +16,28 @@ public class ChomperBehavior : BehaviorTree {
                                                                                   BlackboardDecorator.NotifyAbort.both);
 
         RootSelector.AddChild(attackTargetDecorator);
+
+        // LastSeen Location?
+        Sequencer CheckLastSeenLocSequencer = new Sequencer();
+        BTTask_MoveToLoc moveToLastSeenLoc = new BTTask_MoveToLoc(this, "LastSeenLoc", 3f);
+        BTTask_Wait waitAtLastSeenLoc = new BTTask_Wait(2f);
+        BTTask_RemoveBlackboardData removeLastSeenLoc = new BTTask_RemoveBlackboardData(this, "LastSeenLoc");
+
+        CheckLastSeenLocSequencer.AddChild(moveToLastSeenLoc);
+        CheckLastSeenLocSequencer.AddChild(waitAtLastSeenLoc);
+        CheckLastSeenLocSequencer.AddChild(removeLastSeenLoc);
+
+
+        BlackboardDecorator CheckLastSeenLocDecorator = new BlackboardDecorator(this, // Check if there is a last seen location                                                                                  
+                                                                                  CheckLastSeenLocSequencer,
+                                                                                  "LastSeenLoc",
+                                                                                  BlackboardDecorator.RunCondition.KeyExists,
+                                                                                  BlackboardDecorator.NotifyRule.RunConditionChange,
+                                                                                  BlackboardDecorator.NotifyAbort.none
+                                                                                  );
+        RootSelector.AddChild(CheckLastSeenLocDecorator);
+
+
 
         Sequencer patrollingSeq = new Sequencer(); // Patrolling Part
         BTTask_GetNextPatrolPoint getNextPatrolPoint = new BTTask_GetNextPatrolPoint(this, "PatrolPoint");

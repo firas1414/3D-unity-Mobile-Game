@@ -5,16 +5,16 @@ using UnityEngine;
 public class Selector : Compositor
 {
     protected override NodeResult Update() // This will return not the state of the node, but the state of the whole Selector
-    {if(currentChild != null)
+    {if(currentChild?.Value != null)
     {
         NodeResult result = GetCurrentChild().UpdateNode();
         // We need just one child to be successful (task approved)
-        if (result!=null && result == NodeResult.Success)
+        if (result == NodeResult.Success)
         {
             return NodeResult.Success;
         }
 
-        if (result!=null && result == NodeResult.Failure)
+        if (result == NodeResult.Failure)
         {
             // Check if we have more children
             if (Next())
