@@ -9,7 +9,12 @@ public class ChomperBehavior : BehaviorTree {
         Selector RootSelector = new Selector();
         Sequencer attackTargetSequencer = new Sequencer();
         BTTask_MoveToTarget moveToTarget = new BTTask_MoveToTarget(this, "Target", 2f);
+
+        BTTask_RotateTowardsTarget rotateTowardsTarget = new BTTask_RotateTowardsTarget(this, "Target", 10f);
         attackTargetSequencer.AddChild(moveToTarget);
+        //attackTargetSequencer.AddChild(rotateTowardsTarget);
+
+        
         BlackboardDecorator attackTargetDecorator = new BlackboardDecorator(this, attackTargetSequencer, "Target",
                                                                                   BlackboardDecorator.RunCondition.KeyExists,
                                                                                   BlackboardDecorator.NotifyRule.RunConditionChange, // We only notify when the run condition is changed, if theres a new target we dont care                                                                                    
@@ -50,7 +55,7 @@ public class ChomperBehavior : BehaviorTree {
         RootSelector.AddChild(patrollingSeq);
         
         // BTTask_MoveToTarget moveToTarget = new BTTask_MoveToTarget(this, "Target", 2f);
-        rootNode = RootSelector;
+        rootNode = attackTargetDecorator;
 
 
     }

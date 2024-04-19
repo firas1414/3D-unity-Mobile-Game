@@ -18,13 +18,18 @@ public abstract class BehaviorTree : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        behaviorTreeInterface = GetComponent<BehaviorTreeInterface>();
         ConstructTree(out Root); // Building the behavior tree
         SortTree();
     }
 
+    internal BehaviorTreeInterface GetBehaviorTreeInterface()
+    {
+        return behaviorTreeInterface;
+    }
+
     private void SortTree()
     {
-        behaviorTreeInterface = GetComponent<BehaviorTreeInterface>();
         int priorityCounter = 0;
         Root.SortPriority(ref priorityCounter);
     }
