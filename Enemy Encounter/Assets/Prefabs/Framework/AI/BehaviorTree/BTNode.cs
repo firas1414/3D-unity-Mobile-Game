@@ -12,7 +12,7 @@ public enum NodeResult {
 public abstract class BTNode {
 
 
-    private bool started = false;
+    bool started = false;
     int priority; // Each node will have a priority, the lower the priority value, the higher the priority
 
 
@@ -43,7 +43,7 @@ public abstract class BTNode {
         {
             EndNode();
         }
-        return Update(); // for example: Sequencer, Selector,Compositor,BlackboardDecorator
+        return updateResult; // for example: Sequencer, Selector,Compositor,BlackboardDecorator
     }
 
     // Functions to override in child classes
@@ -71,6 +71,7 @@ public abstract class BTNode {
     {
         EndNode();
     }
+
 
     public virtual BTNode Get()
     {

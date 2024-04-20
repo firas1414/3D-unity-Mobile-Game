@@ -8,20 +8,19 @@ public class BTTask_MoveToTarget : BTNode
 	NavMeshAgent agent;
 	string targetKey;
 	GameObject target;
-	float acceptableDistance = 2f;
+	float acceptableDistance = 1f;
 	BehaviorTree tree; // Specify which tree we're working with, since each enemy can have his own AI Behavior Tree
 
 
-	public BTTask_MoveToTarget(BehaviorTree tree, string targetKey, float acceptableDistance = 2f)
+	public BTTask_MoveToTarget(BehaviorTree tree, string targetKey, float acceptableDistance = 1f)
 	{
-		this.tree = tree;
 		this.targetKey = targetKey;
 		this.acceptableDistance = acceptableDistance;
+		this.tree = tree;
 	}
 	protected override NodeResult Execute()
 	{
 		Blackboard blackboard = tree.Blackboard;
-		blackboard.onBlackboardValueChanged += BlackboardValueChanged;
 		if(blackboard == null || !blackboard.GetBlackboardData(targetKey, out target)) // In case the target not sensed
 		{
 			return NodeResult.Failure;
@@ -35,6 +34,8 @@ public class BTTask_MoveToTarget : BTNode
 		{
 			return NodeResult.Success;
 		}
+		blackboard.onBlackboardValueChanged += BlackboardValueChanged;
+
 
 		agent.SetDestination(target.transform.position);
 		agent.isStopped = false;
@@ -73,8 +74,8 @@ public class BTTask_MoveToTarget : BTNode
 
 	protected override void End()
 	{
-		tree.Blackboard.onBlackboardValueChanged -= BlackboardValueChanged;
 		agent.isStopped = true;
+		tree.Blackboard.onBlackboardValueChanged -= BlackboardValueChanged;
 		base.End();
 	}
 }

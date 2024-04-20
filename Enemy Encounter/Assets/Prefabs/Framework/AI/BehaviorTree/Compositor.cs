@@ -56,6 +56,7 @@ public abstract class Compositor : BTNode
 		
 	}
 
+
     public override BTNode Get()
     {
         if(currentChild == null)

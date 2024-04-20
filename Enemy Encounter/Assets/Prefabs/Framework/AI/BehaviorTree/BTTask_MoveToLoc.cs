@@ -31,7 +31,7 @@ public class BTTask_MoveToLoc : BTNode
 		{
 			return NodeResult.Failure;
 		}
-		if(IsLoactionInAcceptableDistance()) // Check if the AI Agent reached the max distance allowed between him and the target
+		if(IsLocationInAcceptableDistance()) // Check if the AI Agent reached the max distance allowed between him and the target
 		{
 			return NodeResult.Success;
 		}
@@ -44,7 +44,7 @@ public class BTTask_MoveToLoc : BTNode
 
 	protected override NodeResult Update()
 	{
-		if(IsLoactionInAcceptableDistance())
+		if(IsLocationInAcceptableDistance())
 		{
 			agent.isStopped = true;
 			//Debug.Log($"Moved");
@@ -54,7 +54,7 @@ public class BTTask_MoveToLoc : BTNode
 	}
 
 
-	private bool IsLoactionInAcceptableDistance()
+	private bool IsLocationInAcceptableDistance()
 	{
 		return Vector3.Distance(location, tree.transform.position) <= acceptableDistance;
 	}

@@ -5,7 +5,6 @@ using UnityEngine;
 public class Selector : Compositor
 {
     protected override NodeResult Update() // This will return not the state of the node, but the state of the whole Selector
-    {if(currentChild?.Value != null)
     {
         NodeResult result = GetCurrentChild().UpdateNode();
         // We need just one child to be successful (task approved)
@@ -30,6 +29,5 @@ public class Selector : Compositor
         // Default behavior if none of the above conditions are met
         return NodeResult.InProgress;
     }
-    return NodeResult.InProgress;
-    }
+
 }
