@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BTTask_Wait : BTNode {
-    float WaitTime;
+    float WaitTime = 2f;
     float timeElapsed = 0f;
     
     // Constructor

@@ -8,11 +8,12 @@ public class ChomperBehavior : BehaviorTree {
         // SeePlayer?
         Selector RootSelector = new Selector();
         Sequencer attackTargetSequencer = new Sequencer();
-        BTTask_MoveToTarget moveToTarget = new BTTask_MoveToTarget(this, "Target", 4f);
+        BTTask_MoveToTarget moveToTarget = new BTTask_MoveToTarget(this, "Target", 2f);
 
         BTTask_RotateTowardsTarget rotateTowardsTarget = new BTTask_RotateTowardsTarget(this, "Target", 10f);
+        //attackTargetSequencer.AddChild(rotateTowardsTarget);
         attackTargetSequencer.AddChild(moveToTarget);
-        attackTargetSequencer.AddChild(rotateTowardsTarget);
+        
 
         
         BlackboardDecorator attackTargetDecorator = new BlackboardDecorator(this, attackTargetSequencer, "Target",
@@ -24,8 +25,8 @@ public class ChomperBehavior : BehaviorTree {
 
         // LastSeen Location?
         Sequencer CheckLastSeenLocSequencer = new Sequencer();
-        BTTask_MoveToLoc moveToLastSeenLoc = new BTTask_MoveToLoc(this, "LastSeenLoc", 3f);
-        BTTask_Wait waitAtLastSeenLoc = new BTTask_Wait(2f);
+        BTTask_MoveToLoc moveToLastSeenLoc = new BTTask_MoveToLoc(this, "LastSeenLoc", 2f);
+        BTTask_Wait waitAtLastSeenLoc = new BTTask_Wait(4f);
         BTTask_RemoveBlackboardData removeLastSeenLoc = new BTTask_RemoveBlackboardData(this, "LastSeenLoc");
 
         CheckLastSeenLocSequencer.AddChild(moveToLastSeenLoc);

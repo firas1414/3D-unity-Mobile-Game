@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class SightSense : SenseComponent
 {
-    [SerializeField] private float sightDistance = 5f;
-    [SerializeField] private float sightHalfAngle = 5f;
-    [SerializeField] private float eyeHeight = 1f; // eyeHeight determines how high off the ground the raycast starts from.
+    [SerializeField] float sightDistance = 5f;
+    [SerializeField] float sightHalfAngle = 5f;
+    [SerializeField] float eyeHeight = 1f; // eyeHeight determines how high off the ground the raycast starts from.
 
 
 	protected override bool IsStimuliSensable(PerceptionStimuli stimuli)

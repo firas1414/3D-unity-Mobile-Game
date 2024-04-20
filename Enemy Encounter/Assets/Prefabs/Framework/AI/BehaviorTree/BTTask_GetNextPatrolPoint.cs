@@ -11,8 +11,8 @@ public class BTTask_GetNextPatrolPoint : BTNode
 
 	public BTTask_GetNextPatrolPoint(BehaviorTree tree, string patrolPointKey )
 	{
-		this.tree = tree;
 		patrollingComponent = tree.GetComponent<PatrollingComponent>();
+		this.tree = tree;
 		this.patrolPointKey = patrolPointKey;
 	}
 

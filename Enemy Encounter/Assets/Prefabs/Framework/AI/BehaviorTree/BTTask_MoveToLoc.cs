@@ -9,10 +9,10 @@ public class BTTask_MoveToLoc : BTNode
 	NavMeshAgent agent;
 	string locationKey;
 	Vector3 location;
-	float acceptableDistance;
+	float acceptableDistance = 1f;
 	BehaviorTree tree; // Specify which tree we're working with, since each enemy can have his own AI Behavior Tree
 
-	public BTTask_MoveToLoc(BehaviorTree tree, string locationKey, float acceptableDistance)
+	public BTTask_MoveToLoc(BehaviorTree tree, string locationKey, float acceptableDistance = 1)
 	{
 		this.tree = tree;
 		this.locationKey = locationKey;

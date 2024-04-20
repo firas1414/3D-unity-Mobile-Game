@@ -69,14 +69,13 @@ public class BlackboardDecorator : Decorator // This will be reacting to blacboa
 	private bool CheckRunCondition() // Return true if the condition is met, false if not met
 	{
 		bool exists = tree.Blackboard.GetBlackboardData(key, out value); // true if key exists, false if key doesen't exists
-		if(runCondition == RunCondition.KeyExists)
-		{
-			return exists;
-		}
-		else if(runCondition == RunCondition.KeyNotExists)
-		{
-			return !exists;
-		}
+        switch(runCondition)
+        {
+            case RunCondition.KeyExists:
+                return exists;
+            case RunCondition.KeyNotExists:
+                return !exists;
+        }
 		return false;
 	}
 
@@ -111,23 +110,21 @@ public class BlackboardDecorator : Decorator // This will be reacting to blacboa
 
 	private void Notify()
 	{
-		if(notifyAbort == NotifyAbort.none)
-		{
-
-		}
-		else if(notifyAbort == NotifyAbort.self)
-		{
-			AbortSelf();
-		}
-		else if(notifyAbort == NotifyAbort.lower)
-		{
-			AbortLower();
-		}
-		else if(notifyAbort == NotifyAbort.both)
-		{
-			AbortBoth();
-		}
-	}
+        switch (notifyAbort)
+        {
+            case NotifyAbort.none:
+                break;
+            case NotifyAbort.self:
+                AbortSelf();
+                break;
+            case NotifyAbort.lower:
+                AbortLower();
+                break;
+            case NotifyAbort.both:
+                AbortBoth();
+                break;
+        }
+    }
 
 	private void AbortBoth()
 	{
