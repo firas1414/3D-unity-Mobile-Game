@@ -2,74 +2,105 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryComponent : MonoBehaviour
+public class InventoryComponent : MonoBehaviour, IPurchaseListener
 {
-   [SerializeField] Weapon[] initWeaponsPrefabs; // An array of Weapon objects that represent the initial weapons the player starts with in the game.
-   [SerializeField] Transform[] weaponSlots;  // An array of transforms representing the locations where weapons can be equipped.
-   int currentWeaponIndex = -1; // An integer indicating the index of the currently equipped weapon (-1 means no weapon is equipped).
-   List<Weapon> weapons; // A list that stores references to all the weapons the player has.
+    [SerializeField] Weapon[] initWeaponsPrefabs;
 
-   private void Start(){
-       InitializeWeapons();
-   }
+    [SerializeField] Transform defaultWeaponSlot;
+    [SerializeField] Transform[] weaponSlots;
 
-   // This will be executed at the start of the game
-private void InitializeWeapons(){
-       
-       weapons = new List<Weapon>(); //Initialize empty list of weapons we can have
-       foreach(Weapon weapon in initWeaponsPrefabs) {
-          Transform weaponSlot = null;
-          foreach(Transform slot in weaponSlots){
-            // if there's no changes we still use the default slot
-            if (slot.gameObject.tag == weapon.GetAttachSlotTag()){
-                weaponSlot=slot;
+    List<Weapon> weapons;
+    int currentWeaponIndex = -1;
+
+    private void Start()
+    {
+        InitializeWeapons();
+    }
+
+    private void InitializeWeapons()
+    {
+        weapons = new List<Weapon>();
+        foreach (Weapon weapon in initWeaponsPrefabs)
+        {
+            GiveNewWeapon(weapon);
+        }
+
+        NextWeapon();
+    }
+
+    private void GiveNewWeapon(Weapon weapon)
+    {
+        Transform weaponSlot = defaultWeaponSlot;
+        foreach (Transform slot in weaponSlots)
+        {
+            if (slot.gameObject.tag == weapon.GetAttachSlotTag())
+            {
+                weaponSlot = slot;
             }
-          } 
-          Weapon newWeapon = Instantiate(weapon,weaponSlot); 
-          /*
-          'weaponSlot' is a GameObject. In Unity, 
-          the Transform component is attached to GameObjects to represent their position, rotation, and scale.
-          When you access the Transform component of a GameObject, you're essentially accessing the information about its position and orientation in the game world.
-          */
-          newWeapon.Init(gameObject);
-          weapons.Add(newWeapon);
-       }
-
-       NextWeapon(); // Equip first weapon in the bag
-       }
-
-//equip the next weapon
-public void NextWeapon(){
-    int nextWeaponIndex=currentWeaponIndex +1;
-    if(nextWeaponIndex >= weapons.Count){
-        //return to the first weapon if raise the number of weapons we have(reset)
-        nextWeaponIndex=0;
+        }
+        Weapon newWeapon = Instantiate(weapon, weaponSlot);
+        newWeapon.Init(gameObject);
+        weapons.Add(newWeapon);
     }
 
-    EquipWeapon(nextWeaponIndex);
-    }
+    public void NextWeapon()
+    {
+        int nextWeaponIndex = currentWeaponIndex + 1;
+        if(nextWeaponIndex >= weapons.Count)
+        {
+            nextWeaponIndex = 0;
+        }
 
+        EquipWeapon(nextWeaponIndex);
+    }
 
     internal Weapon GetActiveWeapon()
     {
-    return weapons[currentWeaponIndex];
+        if(HasWeapon())
+        {
+            return weapons[currentWeaponIndex];
+        }
+        return null;
     }
 
+    private void EquipWeapon(int weaponIndex)
+    {
+        if(weaponIndex < 0 || weaponIndex >= weapons.Count)
+            return;
 
-private void EquipWeapon(int WeaponIndex){
-    if(WeaponIndex < 0 || WeaponIndex >= weapons.Count){
-        return;
+        if(currentWeaponIndex >= 0 && currentWeaponIndex < weapons.Count)
+        {
+            weapons[currentWeaponIndex].UnEquip();
+        }
+
+        weapons[weaponIndex].Equip();
+        currentWeaponIndex = weaponIndex;
     }
-    
-    if(currentWeaponIndex >= 0 && currentWeaponIndex < weapons.Count){
-        weapons[currentWeaponIndex].UnEquip();
 
+    public bool HandlePurchase(Object newPurchase)
+    {
+        GameObject itemAsGameObject = newPurchase as GameObject;
+        if (itemAsGameObject == null) return false;
+
+        Weapon itemAsWeapon = itemAsGameObject.GetComponent<Weapon>();
+        if (itemAsWeapon == null) return false;
+
+        bool hasWeapon = true;
+        if(weapons.Count == 0)
+        {
+            hasWeapon = false;
+        }
+
+        GiveNewWeapon(itemAsWeapon);
+        if(!hasWeapon)
+        {
+            EquipWeapon(0);
+        }
+        return true;
     }
 
-    weapons[WeaponIndex].Equip();
-    currentWeaponIndex=WeaponIndex;
-
-}
-
-
+    public bool HasWeapon()
+    {
+        return weapons.Count != 0;
+    }
 }

@@ -1,70 +1,62 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Check the status of the task (done/failed/in progress)(timer)
-public enum NodeResult {
+public enum NodeResult
+{
     Success,
     Failure,
-    InProgress
+    Inprogress
 }
 
-public abstract class BTNode {
-
-
-    bool started = false;
-    int priority; // Each node will have a priority, the lower the priority value, the higher the priority
-
-
-    public int GetPriority()
+public abstract class BTNode
+{
+    public NodeResult UpdateNode()
     {
-        return priority;
-    }
-
-    public virtual void SortPriority(ref int priorityCounter)
-    {
-        priority = priorityCounter++;
-        Debug.Log($"{this} has priority {priority}");
-    }
-
-    public NodeResult UpdateNode() { // This gonna be called each frame
-        // One-off thing task (just one step)
-        if (!started) {
+        //one off thing
+        if(!started)
+        {
             started = true;
-            NodeResult execResult = Execute(); // Execute the node and get the result
-            if (execResult != NodeResult.InProgress) { // Tasks
+            NodeResult execResult = Execute();
+            if(execResult != NodeResult.Inprogress)
+            {
                 EndNode();
                 return execResult;
             }
         }
-        // Time-based tasks (multi-steps or based on conditions) - The Execution of the node is still in progress
+
+        //time based
         NodeResult updateResult = Update();
-        if(updateResult != NodeResult.InProgress) // If after updated the node is finished hi execution(for example: Sequencer, Selector,Compositor,BlackboardDecorator)
+        if(updateResult != NodeResult.Inprogress)
         {
             EndNode();
         }
-        return updateResult; // for example: Sequencer, Selector,Compositor,BlackboardDecorator
+        return updateResult;
     }
 
-    // Functions to override in child classes
-    // Execute the one thing task
-    protected virtual NodeResult Execute() {
+    //override in child class
+    protected virtual NodeResult Execute()
+    {
+        //one off thing
         return NodeResult.Success;
     }
 
-    protected virtual NodeResult Update() {
-        // Time-based tasks(tasks that takes time to be finished and just done instantly)
+    protected virtual NodeResult Update()
+    {
+        //time based
         return NodeResult.Success;
     }
-    
-    protected virtual void EndNode()
+
+    protected virtual void End()
+    {
+        //reset and clean up
+    }
+
+    private void EndNode()
     {
         started = false;
         End();
-    }
-
-    protected virtual void End(){
-        //clean up (reset)
     }
 
     public void Abort()
@@ -72,6 +64,21 @@ public abstract class BTNode {
         EndNode();
     }
 
+    bool started = false;
+    int priority;
+
+    public int GetPriority()
+    {
+        return priority;
+    }
+
+    public virtual void SortPriority(ref int priorityConter)
+    {
+        priority = priorityConter++;
+        Debug.Log($"{this} has priorty {priority}");
+    }
+
+    public virtual void Initialize(){}
 
     public virtual BTNode Get()
     {

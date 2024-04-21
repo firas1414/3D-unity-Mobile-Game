@@ -7,7 +7,6 @@ public class CameraArm : MonoBehaviour
 {
     [SerializeField] float armLength;
     [SerializeField] Transform child;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +18,7 @@ public class CameraArm : MonoBehaviour
     {
         child.position = transform.position - child.forward * armLength;
     }
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawLine(child.position, transform.position);

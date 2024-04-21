@@ -4,18 +4,15 @@ using UnityEngine;
 
 public class PatrollingComponent : MonoBehaviour
 {
-	[SerializeField] Transform[] patrolPoints;
-	int currentPatrolPontIndex = -1;
+    [SerializeField] Transform[] patrolPoints;
+    int currentPatrolPointIndex = -1;
 
-	public bool GetNextPatrolPoint(out Vector3 point)
-	{
-		point = Vector3.zero;
-		if(patrolPoints.Length == 0)
-		{
-			return false;
-		}
-		currentPatrolPontIndex = (currentPatrolPontIndex+1) % patrolPoints.Length;
-		point = patrolPoints[currentPatrolPontIndex].position;
-		return true;
-	}
+    public bool GetNextPatrolPoint(out Vector3 point)
+    {
+        point = Vector3.zero;
+        if (patrolPoints.Length == 0) return false;
+        currentPatrolPointIndex = (currentPatrolPointIndex + 1) % patrolPoints.Length;
+        point = patrolPoints[currentPatrolPointIndex].position;
+        return true;
+    }
 }

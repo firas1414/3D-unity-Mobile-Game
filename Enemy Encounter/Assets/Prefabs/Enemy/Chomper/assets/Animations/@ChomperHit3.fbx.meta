@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: ea28880f3c432b74ba40f56c53f03139
 ModelImporter:
-  serializedVersion: 22200
+  serializedVersion: 21202
   internalIDToNameTable:
   - first:
       1: 100000
@@ -653,7 +653,7 @@ ModelImporter:
     - serializedVersion: 16
       name: ChomperHit3
       takeName: Take 001
-      internalID: 7400000
+      internalID: 0
       firstFrame: 1
       lastFrame: 95
       wrapMode: 0
@@ -675,7 +675,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.9208925
+      - time: 0.91020405
         functionName: OnDeathAnimationFinished
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -694,7 +694,6 @@ ModelImporter:
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
-    importPhysicalCameras: 0
     importVisibility: 0
     importBlendShapes: 1
     importCameras: 0
@@ -722,7 +721,6 @@ ModelImporter:
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -756,8 +754,6 @@ ModelImporter:
   humanoidOversampling: 1
   avatarSetup: 2
   addHumanoidExtraRootOnlyWhenUsingAvatar: 0
-  importBlendShapeDeformPercent: 0
-  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

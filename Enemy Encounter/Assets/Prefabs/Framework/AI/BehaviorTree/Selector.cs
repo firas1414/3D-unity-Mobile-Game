@@ -4,30 +4,22 @@ using UnityEngine;
 
 public class Selector : Compositor
 {
-    protected override NodeResult Update() // This will return not the state of the node, but the state of the whole Selector
+    protected override NodeResult Update()
     {
         NodeResult result = GetCurrentChild().UpdateNode();
-        // We need just one child to be successful (task approved)
-        if (result == NodeResult.Success)
+        if(result == NodeResult.Success)
         {
             return NodeResult.Success;
         }
 
-        if (result == NodeResult.Failure)
+        if(result == NodeResult.Failure)
         {
-            // Check if we have more children
             if (Next())
-            {
-                return NodeResult.InProgress;
-            }
+                return NodeResult.Inprogress;
             else
-            {
-                return NodeResult.Failure; // Return Failure if no more children
-            }
+                return NodeResult.Failure;
         }
 
-        // Default behavior if none of the above conditions are met
-        return NodeResult.InProgress;
+        return NodeResult.Inprogress;
     }
-
 }

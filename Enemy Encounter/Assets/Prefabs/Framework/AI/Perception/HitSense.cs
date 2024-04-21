@@ -1,27 +1,28 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitSense : SenseComponent
+public class HitSense : SenseComp
 {
     [SerializeField] HealthComponent healthComponent;
     [SerializeField] float HitMemory = 2f;
 
     Dictionary<PerceptionStimuli, Coroutine> HitRecord = new Dictionary<PerceptionStimuli, Coroutine>();
-
     protected override bool IsStimuliSensable(PerceptionStimuli stimuli)
     {
         return HitRecord.ContainsKey(stimuli);
     }
+
     // Start is called before the first frame update
     void Start()
     {
         healthComponent.onTakeDamage += TookDamage;
     }
 
-    private void TookDamage(float current_Health, float amount, float maxHealth, GameObject Hitter)
+    private void TookDamage(float health, float delta, float maxHealth, GameObject Instigator)
     {
-        PerceptionStimuli stimuli = Hitter.GetComponent<PerceptionStimuli>();
+        PerceptionStimuli stimuli = Instigator.GetComponent<PerceptionStimuli>();
         if(stimuli != null)
         {
             Coroutine newForgettingCoroutine = StartCoroutine(ForgetStimuli(stimuli));
@@ -36,10 +37,10 @@ public class HitSense : SenseComponent
             }
         }
     }
-    
-    IEnumerator ForgetStimuli(PerceptionStimuli stimuli) // if this coroutine eneded, the enemy lost track(lost sense completelty)
+
+    IEnumerator ForgetStimuli(PerceptionStimuli Stimuli)
     {
-        yield return new WaitForSeconds(HitMemory); // This line will last 3 seconds, after that the next lines will be executed
-        HitRecord.Remove(stimuli);
+        yield return new WaitForSeconds(HitMemory);
+        HitRecord.Remove(Stimuli);
     }
 }

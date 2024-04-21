@@ -4,64 +4,73 @@ using UnityEngine;
 
 public abstract class Compositor : BTNode
 {
-    //list of the tasks(nodes)
     LinkedList<BTNode> children = new LinkedList<BTNode>();
-    //represent one task (item of the list)
-    public LinkedListNode<BTNode> currentChild = null;
+    LinkedListNode<BTNode> currentChild = null;
 
-    // Add the childrens
-    public void AddChild (BTNode newChild){
+    public void AddChild(BTNode newChild)
+    {
         children.AddLast(newChild);
     }
-    protected override NodeResult Execute(){
-        //No multiTask
-        if(children.Count == 0){
+
+    protected override NodeResult Execute()
+    {
+        if(children.Count == 0)
+        {
             return NodeResult.Success;
         }
 
-        currentChild = children.First; // Always start with the first children
-        return NodeResult.InProgress ;
+        currentChild = children.First;
+        return NodeResult.Inprogress;
     }
 
-    protected BTNode GetCurrentChild(){
+    protected BTNode GetCurrentChild()
+    {
         return currentChild.Value;
     }
 
-    //Switch between Tasks
-    protected bool Next(){
-        
-        if(currentChild != children.Last){
-            currentChild= currentChild.Next;
+    protected bool Next()
+    {
+        if(currentChild != children.Last)
+        {
+            currentChild = currentChild.Next;
             return true;
         }
         return false;
     }
 
-    protected override void End(){
-        if(currentChild == null)
-        {
+    protected override void End()
+    {
+        if (currentChild == null)
             return;
-        }
+
         currentChild.Value.Abort();
         currentChild = null;
     }
 
-    public override void SortPriority(ref int priorityCounter)
-	{
-		base.SortPriority(ref priorityCounter); // Assign priority to the Compositor
-        foreach(var child in children) // // Assign priority to the Compositor's children
-        {
-            child.SortPriority(ref priorityCounter);
-        }
-		
-	}
+    public override void SortPriority(ref int priorityConter)
+    {
+        base.SortPriority(ref priorityConter);
 
+        foreach(var child in children)
+        {
+            child.SortPriority(ref priorityConter);
+        }
+    }
+
+    public override void Initialize()
+    {
+        base.Initialize();
+        foreach (var child in children)
+        {
+            child.Initialize();
+        }
+    }
 
     public override BTNode Get()
     {
         if(currentChild == null)
         {
-            if(children.Count != 0)
+            if(children.Count!=0)
             {
                 return children.First.Value.Get();
             }
@@ -70,6 +79,7 @@ public abstract class Compositor : BTNode
                 return this;
             }
         }
+
         return currentChild.Value.Get();
     }
 }

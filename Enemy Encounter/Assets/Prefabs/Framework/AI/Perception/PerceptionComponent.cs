@@ -1,68 +1,82 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PerceptionComponent : MonoBehaviour
 {
-    [SerializeField] SenseComponent[] senses;
-
+    [SerializeField] SenseComp[] senses;
+    [Header("Audio")]
+    [SerializeField] AudioClip DetectionAudio;
+    [SerializeField] float volume = 1f;
     LinkedList<PerceptionStimuli> currentlyPerceivedStimulis = new LinkedList<PerceptionStimuli>();
 
     PerceptionStimuli targetStimuli;
-    public delegate void OnTargetChanged(GameObject target, bool HaveTarget);
-    public event OnTargetChanged onTargetChanged;
+
+    public delegate void OnPerceptionTagetChanged(GameObject target, bool sensed);
+
+    public event OnPerceptionTagetChanged onPerceptionTargetChanged;
+
+    private void Awake()
+    {
+        foreach (SenseComp sense in senses)
+        {
+            sense.onPerceptionUpdated += SenseUpdated;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        foreach(SenseComponent sense in senses)
-        {
-            sense.onPerceptionUpdated += NewSenseDetected;
-        }
+        
     }
 
-
-    public void NewSenseDetected(PerceptionStimuli stimuli, bool successfullySensed)
+    private void SenseUpdated(PerceptionStimuli stimuli, bool succsessfulySensed)
     {
-      var nodeFound = currentlyPerceivedStimulis.Find(stimuli);
-      if (successfullySensed)
+        var nodeFound = currentlyPerceivedStimulis.Find(stimuli);
+        if (succsessfulySensed)
         {
             if (nodeFound != null)
             {
-                currentlyPerceivedStimulis.AddAfter(nodeFound, stimuli); // Add the stimuli next to the that node because it's the same stimuli
+                currentlyPerceivedStimulis.AddAfter(nodeFound, stimuli);
             }
             else
             {
                 currentlyPerceivedStimulis.AddLast(stimuli);
             }
         }
-       else // Lost track of that stimuli's sense
-       {
-           currentlyPerceivedStimulis.Remove(nodeFound);
-       }
-       if(currentlyPerceivedStimulis.Count != 0) // The enemy have track of at least one stimuli(player)
-       {
-           PerceptionStimuli highestStimuli = currentlyPerceivedStimulis.First.Value;
-           if(targetStimuli == null || targetStimuli != highestStimuli)
-           {                
-               targetStimuli = highestStimuli; // Updated the enemy's target
-               onTargetChanged?.Invoke(targetStimuli.gameObject, true);
-           }
-       }
-       else // The enemy does not have track of any stimuli's
-       {
-           if(targetStimuli != null)
-           {
-               onTargetChanged?.Invoke(targetStimuli.gameObject, false);
-               targetStimuli = null;
-           }
-       }
+        else
+        {
+            currentlyPerceivedStimulis.Remove(nodeFound);
+        }
+
+        if (currentlyPerceivedStimulis.Count != 0)
+        {
+            PerceptionStimuli highestStimuli = currentlyPerceivedStimulis.First.Value;
+            if (targetStimuli == null || targetStimuli!=highestStimuli)
+            {
+                targetStimuli = highestStimuli;
+                onPerceptionTargetChanged?.Invoke(targetStimuli.gameObject, true);
+                Vector3 audioPos = transform.position;
+                GameplayStatics.PlayAudioAtLoc(DetectionAudio,audioPos, volume);
+            }
+        }
+        else
+        {
+            if(targetStimuli!=null)
+            {
+
+                onPerceptionTargetChanged?.Invoke(targetStimuli.gameObject, false);
+                targetStimuli = null;
+            }
+        }
     }
 
-
-    // Update is called once per frame
-    void Update()
+    internal void AssignPercievedStimui(PerceptionStimuli targetStimuli)
     {
-        
+        if(senses.Length != 0)
+        {
+            senses[0].AssignPerceivedStimuli(targetStimuli);
+        }
     }
 }

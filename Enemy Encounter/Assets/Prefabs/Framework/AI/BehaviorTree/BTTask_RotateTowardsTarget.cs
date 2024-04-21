@@ -1,83 +1,76 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BTTask_RotateTowardsTarget : BTNode
 {
-	BehaviorTree tree;
-	string targetKey;
-	float acceptableDegrees;
-	GameObject target;
-	BehaviorTreeInterface behaviorTreeInterface;
+    BehaviorTree tree;
+    string targetKey;
+    float acceptableDegrees;
+    GameObject target;
+    IBehaviorTreeInterface behaviorTreeInterface;
 
+    public BTTask_RotateTowardsTarget(BehaviorTree tree, string targetKey, float acceptableDegrees = 10f)
+    {
+        this.tree = tree;
+        this.targetKey = targetKey;
+        this.acceptableDegrees = acceptableDegrees;
 
-	public BTTask_RotateTowardsTarget(BehaviorTree tree, string targetKey, float acceptableDegrees = 10f)
-	{
-		this.tree = tree;
-		this.targetKey = targetKey;
-		this.acceptableDegrees = acceptableDegrees;
-		this.behaviorTreeInterface = tree.GetBehaviorTreeInterface();
-	}
+        this.behaviorTreeInterface = tree.GetBehaviorTreeInterface();
+    }
 
-	protected override NodeResult Execute()
-	{
-		if(tree == null || tree.Blackboard == null)
-		{
-			return NodeResult.Failure;
-		}
-		if(behaviorTreeInterface == null)
-		{
-			return NodeResult.Failure;
-		}
-		if(!tree.Blackboard.GetBlackboardData(targetKey, out target))
-		{
-			return NodeResult.Failure;
-		}
-		if(IsInAcceptableDegrees())
-		{
-			return NodeResult.Success;
-		}
-		tree.Blackboard.onBlackboardValueChanged += BlackboardValueChanged;
-		return NodeResult.InProgress;
-	}
+    protected override NodeResult Execute()
+    {
+        if (tree == null || tree.Blackboard == null)
+            return NodeResult.Failure;
 
-	private void BlackboardValueChanged(string key, object val)
-	{
-		if(key == targetKey)
-		{
-			target = (GameObject)val;
-		}
-	}
+        if (behaviorTreeInterface == null)
+            return NodeResult.Failure;
 
-	protected override NodeResult Update()
-	{
-		if(target == null)
-		{
-			return NodeResult.Failure;
-		}
-		if(IsInAcceptableDegrees())
-		{
-			return NodeResult.Success;
-		}
-		behaviorTreeInterface.RotationTowards(target);
-		return NodeResult.InProgress;
-	}
+        if (!tree.Blackboard.GetBlackboardData(targetKey, out target))
+            return NodeResult.Failure;
 
-	bool IsInAcceptableDegrees()
-	{
-		if(target == null)
-		{
-			return false;
-		}
-		Vector3 targetDir = (target.transform.position - tree.transform.position).normalized;
-		Vector3 dir = tree.transform.forward;
-		float degrees = Vector3.Angle(targetDir, dir);
-		return degrees <= acceptableDegrees;
-	}
+        if(IsInAcceptableDegrees())
+            return NodeResult.Success;
 
-	protected override void End()
-	{
-		tree.Blackboard.onBlackboardValueChanged -= BlackboardValueChanged;
-		base.End();
-	}
+        tree.Blackboard.onBlackboardValueChange += BlacKboardValueChanged;
+
+        return NodeResult.Inprogress;
+    }
+
+    private void BlacKboardValueChanged(string key, object val)
+    {
+        if(key == targetKey)
+        {
+            target = (GameObject)val;
+        }
+    }
+
+    protected override NodeResult Update()
+    {
+        if (target == null) 
+            return NodeResult.Failure;
+        if (IsInAcceptableDegrees())
+            return NodeResult.Success;
+
+        behaviorTreeInterface.RotateTowards(target);
+        return NodeResult.Inprogress;
+    }
+
+    bool IsInAcceptableDegrees()
+    {
+        if (target == null) return false;
+        Vector3 targetDir = (target.transform.position - tree.transform.position).normalized;
+        Vector3 dir = tree.transform.forward;
+
+        float degrees = Vector3.Angle(targetDir, dir);
+        return degrees <= acceptableDegrees;
+    }
+
+    protected override void End()
+    {
+        tree.Blackboard.onBlackboardValueChange -= BlacKboardValueChanged;
+        base.End();
+    }
 }

@@ -7,12 +7,12 @@ AnimatorOverrideController:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: PistolAnimOverride
-  m_Controller: {fileID: 9100000, guid: b06485c6ed011a1478c08fe38f3acdbf, type: 2}
+  m_Controller: {fileID: 9100000, guid: e10d1665169c8224aa70fb6f46889438, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: 7400000, guid: e7f8d149f8d7e5242a52e530f0782e92, type: 3}
-    m_OverrideClip: {fileID: -203655887218126122, guid: b3f2d6cf8238990488b9c1dafc403d44,
+    m_OverrideClip: {fileID: -203655887218126122, guid: 77847eecee3420c4f916d401a7c82e91,
       type: 3}
-  - m_OriginalClip: {fileID: -203655887218126122, guid: d45ce484f4177224495de706e19caa74,
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 0e0298c773938b44698d5ee829535af3,
       type: 3}
-    m_OverrideClip: {fileID: -203655887218126122, guid: 060b201a404742c4b8f97e36095ef4f6,
+    m_OverrideClip: {fileID: -203655887218126122, guid: 96ccb439b2c074e4cb1a4f31b509bfd3,
       type: 3}

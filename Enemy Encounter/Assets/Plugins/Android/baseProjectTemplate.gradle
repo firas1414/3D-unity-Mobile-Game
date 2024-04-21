@@ -1,0 +1,22 @@
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        // Must be Android Gradle Plugin 4.0.1 or later. For a list of
+        // compatible Gradle versions refer to:
+        // https://developer.android.com/studio/releases/gradle-plugin
+        classpath 'com.android.tools.build:gradle:4.8.1'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        flatDir {
+            dirs 'libs'
+        }
+    }
+}
