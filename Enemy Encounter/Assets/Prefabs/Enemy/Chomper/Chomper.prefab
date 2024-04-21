@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e9f2090f263feb468b235425f52009d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  current_Health: 100
   maxHealth: 100
 --- !u!114 &-762074455180702448
 MonoBehaviour:
@@ -148,6 +148,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthComponent: {fileID: 7144975058716449982}
   animator: {fileID: 5383608061610414898}
+  perceptionComp: {fileID: 0}
+  behaviorTree: {fileID: 0}
+  movementComponent: {fileID: 0}
 --- !u!95 &5383608061610414898
 Animator:
   serializedVersion: 5
