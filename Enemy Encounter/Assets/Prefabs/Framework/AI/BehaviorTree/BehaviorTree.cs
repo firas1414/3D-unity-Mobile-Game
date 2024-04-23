@@ -14,6 +14,12 @@ public abstract class BehaviorTree : MonoBehaviour
     }
 
     private bool bRunBehaviorTree = true;
+
+    internal IBehaviorTreeInterface GetBehaviorTreeInterface()
+    {
+        return behaviorTreeInterface;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,10 +28,6 @@ public abstract class BehaviorTree : MonoBehaviour
         SortTree();
     }
 
-    internal IBehaviorTreeInterface GetBehaviorTreeInterface()
-    {
-        return behaviorTreeInterface;
-    }
 
     private void SortTree()
     {

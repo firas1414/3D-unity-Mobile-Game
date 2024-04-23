@@ -25,11 +25,11 @@ public abstract class DamageComponent : MonoBehaviour, ITeamInterface
         if (teamInterface == null)
             return false;
 
-        ETeamRelation relation = teamInterface.GetRelationTowards(other);
-        if (DamageFriendly && relation == ETeamRelation.Friendly)
+        ETeamRelation relation = teamInterface.GetRelationTowards(other); // This will let us know if the game object we're seing is wether : neutral, friendly or enemy
+        if (DamageFriendly && relation == ETeamRelation.Friendly) // If i should damage the friendly, and the gameobject im seing is friendly, then i should damage that gamobject
             return true;
 
-        if (DamageEnemy && relation == ETeamRelation.Enemy)
+        if (DamageEnemy && relation == ETeamRelation.Enemy) // same principle
             return true;
 
         if (DamageNeutral && relation == ETeamRelation.Neutral)

@@ -101,7 +101,7 @@ public abstract class Enemy : MonoBehaviour, IBehaviorTreeInterface, ITeamInterf
         if (movementComponent == null) return;
 
         Vector3 posDelta = transform.position - prevPos;
-        float speed = posDelta.magnitude / Time.deltaTime;
+        float speed = posDelta.magnitude / Time.deltaTime; // .magnitude gives us the distance moved(length of the vector), Time.deltaTime is the time passed, so distance/time = speed
         Animator.SetFloat("Speed", speed);
         prevPos = transform.position;
     }
