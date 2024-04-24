@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// INHERITS FROM THE ENEMY CLASS, AND OVERRIDES THE AttackTarget METHOD
 public class Spiter : Enemy
 {
     [SerializeField] Projectile projectilePrefab;
