@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// USED FOR MAKING THE SPITTING MECHANISM, THIS CLASS SHOULD BE APPLIED ON THE PROJECTILE PREFAB
 public class Projectile : MonoBehaviour
 {
     [SerializeField] float FlightHeight;
