@@ -17,7 +17,7 @@ public abstract class DamageComponent : MonoBehaviour, ITeamInterface
 
     public void SetTeamInterfaceSrc(ITeamInterface teamInterface)
     {
-        this.teamInterface = teamInterface;
+        this.teamInterface = teamInterface; // This makes the DamageComponent use the ITeamInterface of the Object that has a script called either Player or enemy_name script attached to it
     }
 
     public bool ShouldDamage(GameObject other)
