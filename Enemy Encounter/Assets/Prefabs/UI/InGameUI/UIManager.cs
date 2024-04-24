@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
+// RESPONSIBLE FOR ENABLING AND DISABLING A UI BASED ON GAME EVENTS
 public class UIManager : MonoBehaviour
 {
     [SerializeField] CanvasGroup GameplayControl;
