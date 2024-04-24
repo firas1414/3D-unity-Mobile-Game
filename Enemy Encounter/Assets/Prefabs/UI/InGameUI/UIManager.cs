@@ -5,7 +5,7 @@ using UnityEngine;
 
 
 
-// RESPONSIBLE FOR ENABLING AND DISABLING A UI BASED ON GAME EVENTS
+// RESPONSIBLE FOR ENABLING AND DISABLING PART OF THE UI BASED ON GAME EVENTS
 public class UIManager : MonoBehaviour
 {
     [SerializeField] CanvasGroup GameplayControl;
