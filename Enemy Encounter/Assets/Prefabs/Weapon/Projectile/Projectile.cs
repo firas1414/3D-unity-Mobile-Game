@@ -13,7 +13,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] ParticleSystem ExplosionVFX; // THIS PARTICLE IS RESPONSIBLE FOR MAKING THE EXPLOSION, IT IS SPAWNED ONCE THE FIRE HITS THE PLAYER'S COLLIDER
     ITeamInterface instigatorTeamInterface;
 
-    public void Launch(GameObject instigator, Vector3 Destination)
+    public void Launch(GameObject instigator, Vector3 Destination) // LAUNCH THE PARTICLE WHEN AN ATTACK IS LAUNCHED FROM THE SPITTER
     {
         instigatorTeamInterface = instigator.GetComponent<ITeamInterface>();
         if (instigatorTeamInterface != null)
@@ -36,7 +36,7 @@ public class Projectile : MonoBehaviour
         rigidBody.AddForce(flightVel, ForceMode.VelocityChange);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other) // THIS METHOD IS CALLED WHEN A COLLIDER ENTERS THE TRIGGER ZONE OF THE GAMEOBJECT THIS SCRIPT IS ATTACHED TO(Projectile)
     {
         if(instigatorTeamInterface.GetRelationTowards(other.gameObject) != ETeamRelation.Friendly) // CHECKS IF THE OBJECT THAT THE PARTICLE COLLIDED WITH IS A PLAYER OR NOT, IF YES DESTROY THE PARTICLE AND MAKE AN EXMPLOSION EFFECT
         {
