@@ -21,7 +21,7 @@ public class Projectile : MonoBehaviour
             DamageComponent.SetTeamInterfaceSrc(instigatorTeamInterface);
         }
 
-        // CALCULATING THE PARTICLE MOVEMENT MECHANISM
+        // CREATING THE PARTICLE MOVEMENT MECHANISM
         float gravity = Physics.gravity.magnitude;
         float halfFlightTime = Mathf.Sqrt((FlightHeight * 2.0f) / gravity);
 
