@@ -15,7 +15,7 @@ public class SpeedBoostAbility : Ability
     {
         if (!CommitAbility()) return;
 
-        Player = AbilityComp.GetComponent<Player>();
+        Player = AbilityComp.GetComponent<Player>(); // RETRIEVES THE GAME OBJECT THAT HAS BOTH CLASSES Player AND AbilityComponent ATTACHED TO IT(which in our case will be the player)
         Player.AddMoveSpeed(boostAmt);
         AbilityComp.StartCoroutine(RestSpeed());
     }
