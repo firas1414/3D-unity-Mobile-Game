@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Ability/SpeedBoost")]
+[CreateAssetMenu(menuName = "Ability/SpeedBoost")] // THIS LINE SAYS: HEY UNUITY I KNOW I CAN'T INSTANSIATE THIS CLASS, BUT I WANT TO BE ABLE TO MAKE AN INSTANCE OF THIS CLASS IN THE ASSET
 public class SpeedBoostAbility : Ability
 {
     [Header("SpeedBoost")]
