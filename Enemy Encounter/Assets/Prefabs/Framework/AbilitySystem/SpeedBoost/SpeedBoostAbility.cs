@@ -9,7 +9,6 @@ public class SpeedBoostAbility : Ability
     [SerializeField] float boostAmt = 20f;
     [SerializeField] float boostDuration = 2f;
 
-    //TODO: maybe refactor this into movement component
     Player Player;
 
     public override void ActivateAbility()
