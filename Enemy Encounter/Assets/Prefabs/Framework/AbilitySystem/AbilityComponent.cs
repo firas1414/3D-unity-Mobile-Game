@@ -33,7 +33,7 @@ public class AbilityComponent : MonoBehaviour, IPurchaseListener, IRewardListene
         }
     }
 
-    void GiveAbility(Ability ability)
+    void GiveAbility(Ability ability) // ADD THE ABILITY TO THE PLAYER
     {
         Ability newAbility = Instantiate(ability);
         newAbility.InitAbility(this); // THIS IS NEEDED SO THAT THE ABILITY INSTANCE KNOWS WHOS THE ABLITY COMPONENT THAT SHE'S GONNA USE(the owner of the abilities)
