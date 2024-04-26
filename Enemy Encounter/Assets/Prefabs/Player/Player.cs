@@ -18,7 +18,7 @@ public class Player : MonoBehaviour, ITeamInterface
     internal void AddMoveSpeed(float boostAmt)
     {
         moveSpeed += boostAmt;
-        moveSpeed = Mathf.Clamp(moveSpeed, minMoveSpeed, maxMoveSpeed);
+        moveSpeed = Mathf.Clamp(moveSpeed, minMoveSpeed, maxMoveSpeed); // ENSURES THAT MOVE SPEED DOESN'T GO BELOW MIN MOVESPEED OR EXCEED MAX MOVESPEED, MAINTAINING IT WITHIN A SPECIFIED RANGE.
     }
 
     [Header("Inventory")]
