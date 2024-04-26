@@ -40,10 +40,10 @@ public class AbilityUI : MonoBehaviour
         OffsetPivot.localPosition = Vector3.Lerp(OffsetPivot.localPosition, GoalOffset, Time.deltaTime * ScaleSpeed);
     }
 
-    internal void Init(Ability newAbility)
+    internal void Init(Ability newAbility) // CALLED WHEN A NEW ABILITY IS ADDED TO THE PLAYER
     {
         ability = newAbility;
-        AbilityIcon.sprite = newAbility.GetAbilityIcon();
+        AbilityIcon.sprite = newAbility.GetAbilityIcon(); // GET THE AbilityIcon OF THAT ABILITY(variable located in the Ability class), AND ASSIGNS IT TO THE AbilityIcon IMAGE OF THE AbilityUI PREFAB
         CooldownWheel.enabled = false;
         ability.onCooldownStarted += StartCooldown;
     }

@@ -31,10 +31,10 @@ public class AbilityDock : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         abilityComponent.onNewAbilityAdded += AddAbility;
     }
 
-    private void AddAbility(Ability newAbility)
+    private void AddAbility(Ability newAbility) // WHEN A NEW ABILITY IS ADDED, THIS FUNCTION IS CALLED TO ADD THE UI OF THAT NEW ABILITY
     {
         AbilityUI newAbilityUI = Instantiate(AbilityUIPrefab, Root);
-        newAbilityUI.Init(newAbility);
+        newAbilityUI.Init(newAbility); // LET THE AbilityUI KNOW WHOS THE NEW ADDED ABILITY
         abilityUIs.Add(newAbilityUI);
     }
 
