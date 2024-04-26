@@ -41,7 +41,7 @@ public abstract class Ability : ScriptableObject
     public abstract void ActivateAbility();
 
 
-    //expected to be called in the child class.
+    // THIS METHOD WILL BE CALLED IN THE CHILD CLASS SINCE EACH ABILITY HAS IT'S OWN ABILITY POWER
     protected bool CommitAbility() // CHECKS WETHER ALL THE CONDITIONS NEEDED TO ACTIVATE THE ABILITY ARE MET
     {
         if (abilityOnCooldown) return false; // CHECKS IF THE ABILITY IS STILL ON COOLDOWN
