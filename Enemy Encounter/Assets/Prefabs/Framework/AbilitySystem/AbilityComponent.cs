@@ -50,16 +50,16 @@ public class AbilityComponent : MonoBehaviour, IPurchaseListener, IRewardListene
         }
     }
 
-    float GetStamina()
+    float GetStamina() // RETURNS STAMINA VALUE
     {
         return stamina;
     }
 
-    public bool TryConsumeStamina(float staminaToConsume)
+    public bool TryConsumeStamina(float staminaToConsume) // THIS WILL REDUCE THE STAMINA VALUE AFTER USING A CERTAIN ABILITY, RETURNS TRUE IF THERE IS ENOUGH STAMINA, FALSE IF NOT
     {
-        if (stamina <= staminaToConsume) return false;
+        if (stamina <= staminaToConsume) return false; // IF THERE IS NOT ENOUGH STAMINA, DONT REDUCE STAMINA
 
-        stamina -= staminaToConsume;
+        stamina -= staminaToConsume; // IF THERE IS ENOUGH STAMINA, REDUCE STAMINA
         BroadcastStaminaChangeImmedietely();
         return true;
     }
