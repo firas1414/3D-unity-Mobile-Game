@@ -5,6 +5,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+
+// RESPONSIBLE FOR KNOWING WHAT ABILITY IS ADDED, AND THEN INSTANCIATING THAT ABILITY UI AND POPULATING THE ICON, AND WHEN THE ABILITY IS CASTED IT WILL SHOW THE COOLDOWN
+// THIS CLASS SHOULD BE ATTACHED TO THE AbilityDock Prefab
 public class AbilityDock : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField] AbilityComponent abilityComponent;
