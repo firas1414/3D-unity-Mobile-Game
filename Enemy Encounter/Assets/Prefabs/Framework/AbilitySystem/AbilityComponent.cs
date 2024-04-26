@@ -13,8 +13,8 @@ public class AbilityComponent : MonoBehaviour, IPurchaseListener, IRewardListene
 
     private List<Ability> abilities = new List<Ability>(); // CURRENT AVAILABLE ABILITIES
 
-    public event OnNewAbilityAdded onNewAbilityAdded;
-    public event OnStaminaChange onStaminaChange;
+    public event OnNewAbilityAdded onNewAbilityAdded; // ABILITY ADDED EVENT
+    public event OnStaminaChange onStaminaChange; // STAMINA CHANGED EVENT
 
     [SerializeField] float stamina = 200f;
     [SerializeField] float maxStamina = 200f;
