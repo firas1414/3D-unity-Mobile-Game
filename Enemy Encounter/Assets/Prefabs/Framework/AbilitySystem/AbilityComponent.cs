@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// THIS WILL BE ATTACHED TO THE PLAYER TO HANDLE THE ABILITIES
 public class AbilityComponent : MonoBehaviour, IPurchaseListener, IRewardListener
 {
-    [SerializeField] Ability[] InitialAbilities;
+    [SerializeField] Ability[] InitialAbilities; // INITIAL ABILITIES THAT A PLAYER CAN HAVE
 
     public delegate void OnNewAbilityAdded(Ability newAbility);
     public delegate void OnStaminaChange(float newAmount, float maxAmount);
 
-    private List<Ability> abilities = new List<Ability>();
+    private List<Ability> abilities = new List<Ability>(); // CURRENT AVAILABLE ABILITIES
 
     public event OnNewAbilityAdded onNewAbilityAdded;
     public event OnStaminaChange onStaminaChange;
@@ -42,7 +44,7 @@ public class AbilityComponent : MonoBehaviour, IPurchaseListener, IRewardListene
     
     public void ActivateAbility(Ability abilityToActivate)
     {
-        if(abilities.Contains(abilityToActivate))
+        if(abilities.Contains(abilityToActivate)) // CHECKS IF THAT ABILITY EXISTS IN THE "abilities" LIST
         {
             abilityToActivate.ActivateAbility();
         }
