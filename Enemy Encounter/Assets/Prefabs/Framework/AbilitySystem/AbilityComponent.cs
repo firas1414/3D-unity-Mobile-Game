@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-// THIS WILL BE ATTACHED TO THE PLAYER TO HANDLE THE ABILITIES
+// THIS WILL BE ATTACHED TO THE PLAYER TO HANDLE THE ABILITIES(handles the abilties part of the player like current stamina triggering events)
 public class AbilityComponent : MonoBehaviour, IPurchaseListener, IRewardListener
 {
     [SerializeField] Ability[] InitialAbilities; // INITIAL ABILITIES THAT A PLAYER CAN HAVE
@@ -36,7 +36,7 @@ public class AbilityComponent : MonoBehaviour, IPurchaseListener, IRewardListene
     void GiveAbility(Ability ability)
     {
         Ability newAbility = Instantiate(ability);
-        newAbility.InitAbility(this);
+        newAbility.InitAbility(this); // THIS IS NEEDED SO THAT THE ABILITY INSTANCE KNOWS WHOS THE ABLITY COMPONENT THAT SHE'S GONNA USE(the owner of the abilities)
         abilities.Add(newAbility);
         onNewAbilityAdded?.Invoke(newAbility);
     }

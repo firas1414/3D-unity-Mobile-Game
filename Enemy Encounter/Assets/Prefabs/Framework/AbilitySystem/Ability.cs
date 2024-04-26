@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// HANDLES THE ABILITIES MECHANISM (handles the abilities part, like knowing how much stamina each ability needs to consume)
 public abstract class Ability : ScriptableObject
 {
     [SerializeField] Sprite AbilityIcon;
@@ -38,13 +40,13 @@ public abstract class Ability : ScriptableObject
 
     public abstract void ActivateAbility();
 
-    //check all the conditiion needed to activate the ability
-    //expected to be called in the child class.
-    protected bool CommitAbility()
-    {
-        if (abilityOnCooldown) return false;
 
-        if(abilityComponent == null || !abilityComponent.TryConsumeStamina(staminaCost))
+    //expected to be called in the child class.
+    protected bool CommitAbility() // CHECKS WETHER ALL THE CONDITIONS NEEDED TO ACTIVATE THE ABILITY ARE MET
+    {
+        if (abilityOnCooldown) return false; // CHECKS IF THE ABILITY IS STILL ON COOLDOWN
+
+        if(abilityComponent == null || !abilityComponent.TryConsumeStamina(staminaCost)) // CHECK IF THERES IS NO SUFFICIENT STAMINA
             return false;
 
         StartAbilityCooldown();
