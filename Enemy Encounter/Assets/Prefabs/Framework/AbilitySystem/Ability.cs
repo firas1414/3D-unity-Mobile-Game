@@ -38,7 +38,7 @@ public abstract class Ability : ScriptableObject
         this.abilityComponent = abilityComponent;
     }
 
-    public abstract void ActivateAbility();
+    public abstract void ActivateAbility(); // CALLED WHEN A TOUCH HAPPENS TO THE AbilityUi
 
 
     // THIS METHOD WILL BE CALLED IN THE CHILD CLASS SINCE EACH ABILITY HAS IT'S OWN ABILITY POWER
