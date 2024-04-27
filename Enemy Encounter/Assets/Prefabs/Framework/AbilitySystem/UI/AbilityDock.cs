@@ -63,11 +63,11 @@ public class AbilityDock : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         foreach(AbilityUI abilityUI in abilityUIs)
         {
             float abilityUIVerticalPos = abilityUI.transform.position.y;
-            float distance = Mathf.Abs(touchVerticalPos - abilityUIVerticalPos);
+            float distance = Mathf.Abs(touchVerticalPos - abilityUIVerticalPos); // Calculates the distance between the vertical position of the touch (touchVerticalPos) and the vertical position of the current AbilityUI element (abilityUIVerticalPos). 
 
-            if(distance > ScaleRange)
+            if(distance > ScaleRange) // IF WE'RE FAR FROM THE RANGE, DON'T DO ANY SCALING
             {
-                abilityUI.SetScaleAmt(0);
+                abilityUI.SetScaleAmt(0); // DON'T DO ANY SCALING
                 continue;
             }
 
