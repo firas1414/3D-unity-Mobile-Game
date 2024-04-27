@@ -25,8 +25,7 @@ public class AbilityDock : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     List<AbilityUI> abilityUIs = new List<AbilityUI>();
 
     PointerEventData touchData;
-    AbilityUI hightlightedAbility;
-    private void Awake()
+    AbilityUI hightlightedAbility; // REPRESENTS THE AbilityUi THAT BELONGS TO THE ABILITY THE PLAYER CLICKED ON
     {
         abilityComponent.onNewAbilityAdded += AddAbility;
     }
@@ -102,15 +101,16 @@ public class AbilityDock : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         }
     }
 
-    bool GetUIUnderPointer(PointerEventData eventData, out AbilityUI abilityUI)
+    bool GetUIUnderPointer(PointerEventData eventData, out AbilityUI abilityUI) // RETURNS TRUE & AbilityUi IF FOUND AN AbilityUi UNDER THE TOUCH POSITION
     {
         List<RaycastResult> findAbility = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(eventData, findAbility);
+        EventSystem.current.RaycastAll(eventData, findAbility); // PERFORMS A RAYCAST FROM THE TOUCH POSITION AND STORES INFORMATION ABOUT ALL THE GAMEOBJECTS HIT BY THE RAYCAST IN THE "findAbility" LIST
 
         abilityUI = null;
         foreach(RaycastResult result in findAbility)
         {
             abilityUI = result.gameObject.GetComponentInParent<AbilityUI>();
+            // "result.gameObject" GETS THE GAMEOBJECT THAT WAS HIT BY THE RAYCAST STORED IN RESULT, THEN CHECKS IF THAT GameObject HAS A COMPONENT CALLED AbilityUI ATTACHED TO, IT IF YES ASSIGN IT TO THE AbilityUi Variable
             if (abilityUI != null)
                 return true;
         }
