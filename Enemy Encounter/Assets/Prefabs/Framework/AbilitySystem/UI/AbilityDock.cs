@@ -72,7 +72,7 @@ public class AbilityDock : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
                 abilityUI.SetScaleAmt(0); // DON'T DO ANY SCALING
                 continue;
             }
-
+            // CALCULATES A SCALE AMOUNT BASED ON THE DISTANCE. THE CLOSER THE ABILITY IS TO THE TOUCH POSITION, THE LARGER ITS SCALE AMOUNT WILL BE
             float scaleAmt = (ScaleRange - distance) / ScaleRange;
             abilityUI.SetScaleAmt(scaleAmt);
         }
