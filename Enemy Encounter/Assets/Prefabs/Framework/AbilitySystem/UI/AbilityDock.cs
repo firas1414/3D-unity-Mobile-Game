@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 
+
 // RESPONSIBLE FOR KNOWING WHAT ABILITY IS ADDED, AND THEN INSTANCIATING THAT ABILITY UI AND POPULATING THE ICON, AND WHEN THE ABILITY IS CASTED IT WILL SHOW THE COOLDOWN
 // THIS CLASS SHOULD BE ATTACHED TO THE AbilityDock Prefab
 public class AbilityDock : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
@@ -26,6 +27,7 @@ public class AbilityDock : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     PointerEventData touchData;
     AbilityUI hightlightedAbility; // REPRESENTS THE AbilityUi THAT BELONGS TO THE ABILITY THE PLAYER CLICKED ON
+    private void Awake()
     {
         abilityComponent.onNewAbilityAdded += AddAbility;
     }
@@ -63,7 +65,7 @@ public class AbilityDock : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         foreach(AbilityUI abilityUI in abilityUIs)
         {
             float abilityUIVerticalPos = abilityUI.transform.position.y;
-            float distance = Mathf.Abs(touchVerticalPos - abilityUIVerticalPos); // Calculates the distance between the vertical position of the touch (touchVerticalPos) and the vertical position of the current AbilityUI element (abilityUIVerticalPos). 
+            float distance = Mathf.Abs(touchVerticalPos - abilityUIVerticalPos); // Calculates the distance between the vertical position of the touch (touchVerticalPos) and the vertical position of the current AbilityUI element (abilityUIVerticalPos)
 
             if(distance > ScaleRange) // IF WE'RE FAR FROM THE RANGE, DON'T DO ANY SCALING
             {
