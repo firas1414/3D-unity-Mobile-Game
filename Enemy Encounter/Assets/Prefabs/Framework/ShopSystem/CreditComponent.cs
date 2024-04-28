@@ -10,7 +10,7 @@ public interface IPurchaseListener
 public class CreditComponent : MonoBehaviour, IRewardListener
 {
     [SerializeField] int credits;
-    [SerializeField] Component[] PurchaseListeners;
+    [SerializeField] Component[] PurchaseListeners; // THIS IS GONNA TAKE THE InventoryComponent
 
     List<IPurchaseListener> purchaseListenerInterfaces = new List<IPurchaseListener>();
 
@@ -21,12 +21,12 @@ public class CreditComponent : MonoBehaviour, IRewardListener
 
     private void CollectPurchaseListeners()
     {
-        foreach(Component listener in PurchaseListeners)
+        foreach(Component listener in PurchaseListeners) // WE'RE MAKING A foreach TO MAKE THIS FLEXIBLE, SINCE WE HAVE 2 COMPONENTS, AbilityComponent & InventoryComponent
         {
             IPurchaseListener listenerInterface = listener as IPurchaseListener; 
             if(listenerInterface != null)
             {
-                purchaseListenerInterfaces.Add(listenerInterface);
+                purchaseListenerInterfaces.Add(listenerInterface); // ADD THE InventoryComponent's & AbilityComponent interface(IPurchaseListener) TO THE purchaseListenerInterfaces
             }
         }
     }
