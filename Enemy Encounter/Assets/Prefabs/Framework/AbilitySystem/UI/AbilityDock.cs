@@ -50,7 +50,7 @@ public class AbilityDock : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         if(touchData!=null)
         {
-            GetUIUnderPointer(touchData, out hightlightedAbility);
+            GetUIUnderPointer(touchData, out hightlightedAbility); // RETURNS TRUE IF FOUND AN ABILITY UNDER THE TOUCH POSITION, hightlightedAbility is THAT ABILITY
             ArrangeScale(touchData);
         }
 
