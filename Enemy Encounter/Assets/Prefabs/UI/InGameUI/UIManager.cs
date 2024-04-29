@@ -22,12 +22,13 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         List<CanvasGroup> children = new List<CanvasGroup>();
-        GetComponentsInChildren(true, children);
+        GetComponentsInChildren(true, children); // This method searches for CanvasGroup components in the children of the current object and its descendants.
+        // The true parameter indicates that it should include inactive CanvasGroup components as well.
         foreach(CanvasGroup child in children)
         {
-            if(child.transform.parent == transform)
+            if(child.transform.parent == transform) // WE ONLY NEED THE CHILDRENS OF THE InGameUi Object, SO WE SHOULD TAKE THE CHILDREN'S THAT THEIR PARENT'S IS InGameUi  
             {
-                AllChildren.Add(child);
+                AllChildren.Add(child); // FILL THE AllChildren WITH THESE CHILDRENS'S CanvasGroup(GameplayControl, PauseMenu, DeathMenu, ShopUI, WinMenu)
                 SetGroupActive(child, false, false);
             }
         }
