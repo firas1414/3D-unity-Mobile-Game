@@ -59,7 +59,7 @@ public class ShopUI : MonoBehaviour
         }
     }
 
-    private void InitShopItems() // RETRIEVE THE SHOP ITEMS FROM THE shopSystem Class(Scriptable Object), AND PUT THEM IN THE shopItems LIST
+    private void InitShopItems() // RETRIEVE THE SHOP ITEMS FROM THE shopSystem Class(Scriptable Object), AND PUT THEM IN THE shopItems LIST, THEN ADD THEIR UI's to THE ShopUI
     {
         ShopItem[] shopItems = shopSystem.GetShopItems(); 
         foreach(ShopItem item in shopItems)
@@ -68,7 +68,7 @@ public class ShopUI : MonoBehaviour
         }
     }
 
-    private void AddShopItem(ShopItem item)
+    private void AddShopItem(ShopItem item) // ADD A ShopItem's UI to the ShopUI
     {
         ShopItemUI newItemUI = Instantiate(shopItemUIPrefab, shopList);
         newItemUI.Init(item, creditComp.Credit);
