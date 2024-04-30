@@ -7,9 +7,9 @@ public class InventoryComponent : MonoBehaviour, IPurchaseListener
     [SerializeField] Weapon[] initWeaponsPrefabs;
 
     [SerializeField] Transform defaultWeaponSlot;
-    [SerializeField] Transform[] weaponSlots;
+    [SerializeField] Transform[] weaponSlots; // THIS LIST REPRESENTS THE SLOTS THAT WEAPONS GO INTO
 
-    List<Weapon> weapons;
+    List<Weapon> weapons; // THIS LIST REPRESENTS THE WEAPONS THAT THE PLAYER CAN EQUIP
     int currentWeaponIndex = -1;
 
     private void Start()
@@ -28,7 +28,7 @@ public class InventoryComponent : MonoBehaviour, IPurchaseListener
         NextWeapon();
     }
 
-    private void GiveNewWeapon(Weapon weapon)
+    private void GiveNewWeapon(Weapon weapon) // RESPONSIBLE FOR DISPLAYING WEAPONS IN IT'S GAMEPLAY SLOT
     {
         Transform weaponSlot = defaultWeaponSlot;
         foreach (Transform slot in weaponSlots)
