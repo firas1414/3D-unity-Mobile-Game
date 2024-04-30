@@ -33,7 +33,7 @@ public class InventoryComponent : MonoBehaviour, IPurchaseListener
         Transform weaponSlot = defaultWeaponSlot;
         foreach (Transform slot in weaponSlots)
         {
-            if (slot.gameObject.tag == weapon.GetAttachSlotTag())
+            if (slot.gameObject.tag == weapon.GetAttachSlotTag()) // IF WE FOUND THE SLOT WHERE THE NEW PURCHASED WEAPON SHOULD GO, THEN PUT IT THERE
             {
                 weaponSlot = slot;
             }
