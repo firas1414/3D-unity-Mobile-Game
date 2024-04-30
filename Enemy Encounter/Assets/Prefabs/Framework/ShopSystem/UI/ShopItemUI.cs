@@ -45,7 +45,7 @@ public class ShopItemUI : MonoBehaviour
         PriceText.text = "$" + item.Price.ToString();
         DescriptionText.text = item.Description;
 
-        Refresh(AvaliableCredits);
+        Refresh(AvaliableCredits); // REFRESH THE ITEM UI VISIBILITY(make the text red & gray bg if we dont have money)
     }
 
     internal ShopItem GetItem()
