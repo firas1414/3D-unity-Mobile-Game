@@ -38,7 +38,7 @@ public class InventoryComponent : MonoBehaviour, IPurchaseListener
                 weaponSlot = slot;
             }
         }
-        Weapon newWeapon = Instantiate(weapon, weaponSlot);
+        Weapon newWeapon = Instantiate(weapon, weaponSlot); // newWeapon is referencig to a Prefab([SerializeField]), soo that it will be visible in the GamePlay
         newWeapon.Init(gameObject);
         weapons.Add(newWeapon);
     }
@@ -68,7 +68,7 @@ public class InventoryComponent : MonoBehaviour, IPurchaseListener
         if(weaponIndex < 0 || weaponIndex >= weapons.Count)
             return;
 
-        if(currentWeaponIndex >= 0 && currentWeaponIndex < weapons.Count)
+        if(currentWeaponIndex >= 0 && currentWeaponIndex < weapons.Count) // IF THE PLAYER ALREADY HAVE AN EQUIPED WEAPON, THEN UNEQUIP IT
         {
             weapons[currentWeaponIndex].UnEquip();
         }

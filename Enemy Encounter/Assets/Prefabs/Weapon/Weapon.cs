@@ -40,14 +40,14 @@ public abstract class Weapon : MonoBehaviour
 
     public void Equip()
     {
-        gameObject.SetActive(true);
+        gameObject.SetActive(true); // MAKE THE WEAPON VISIBLE IN THE PLAYER'S HANDS
         Owner.GetComponent<Animator>().runtimeAnimatorController = overrideController;
         Owner.GetComponent<Animator>().SetFloat("AttackRateMult", AttackRateMult);
     }
 
     public void UnEquip()
     {
-        gameObject.SetActive(false);
+        gameObject.SetActive(false); // MAKE THE WEAPON UNVISIBLE IN THE PLAYER'S HANDS
     }
 
     public void DamageGameObject(GameObject objToDamage, float amt)
