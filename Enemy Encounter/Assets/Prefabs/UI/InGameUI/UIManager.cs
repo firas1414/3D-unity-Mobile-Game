@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour
         {
             if(child.transform.parent == transform) // WE ONLY NEED THE CHILDRENS OF THE InGameUi Object, SO WE SHOULD TAKE THE CHILDREN'S THAT THEIR PARENT'S IS InGameUi  
             {
-                AllChildren.Add(child); // FILL THE AllChildren WITH THESE CHILDRENS'S CanvasGroup(GameplayControl, PauseMenu, DeathMenu, ShopUI, WinMenu)
+                AllChildren.Add(child); // FILL THE AllChildren LIST WITH THESE CHILDRENS'S CanvasGroup(GameplayControl, PauseMenu, DeathMenu, ShopUI, WinMenu)
                 SetGroupActive(child, false, false);
             }
         }

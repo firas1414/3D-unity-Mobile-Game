@@ -68,12 +68,12 @@ public class ShopUI : MonoBehaviour
         }
     }
 
-    private void AddShopItem(ShopItem item) // ADD A ShopItem's UI to the ShopUI
+    private void AddShopItem(ShopItem item) // ADD A ShopItem's UI to the ShopUI Prefab
     {
-        ShopItemUI newItemUI = Instantiate(shopItemUIPrefab, shopList);
+        ShopItemUI newItemUI = Instantiate(shopItemUIPrefab, shopList); // CREATE A ShopItemUI FOR THE ITEM
         newItemUI.Init(item, creditComp.Credit);
         newItemUI.onItemSelected += ItemSelected;
-        shopItems.Add(newItemUI);
+        shopItems.Add(newItemUI); // PUT THE ShopItemUI's IN THE shopItems LIST
     }
 
     private void ItemSelected(ShopItemUI Item)
