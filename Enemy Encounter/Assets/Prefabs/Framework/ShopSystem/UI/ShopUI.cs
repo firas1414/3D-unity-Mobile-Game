@@ -59,9 +59,9 @@ public class ShopUI : MonoBehaviour
         }
     }
 
-    private void InitShopItems()
+    private void InitShopItems() // RETRIEVE THE SHOP ITEMS FROM THE shopSystem Class(Scriptable Object), AND PUT THEM IN THE shopItems LIST
     {
-        ShopItem[] shopItems = shopSystem.GetShopItems();
+        ShopItem[] shopItems = shopSystem.GetShopItems(); 
         foreach(ShopItem item in shopItems)
         {
             AddShopItem(item);
