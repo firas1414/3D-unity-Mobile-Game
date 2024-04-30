@@ -28,7 +28,7 @@ public class InventoryComponent : MonoBehaviour, IPurchaseListener
         NextWeapon();
     }
 
-    private void GiveNewWeapon(Weapon weapon) // RESPONSIBLE FOR DISPLAYING WEAPONS IN IT'S GAMEPLAY SLOT
+    private void GiveNewWeapon(Weapon weapon) // RESPONSIBLE FOR DISPLAYING WEAPONS IN IT'S GAMEPLAY SLOT WHEN THE WEAPON IS PURCHASED
     {
         Transform weaponSlot = defaultWeaponSlot;
         foreach (Transform slot in weaponSlots)
