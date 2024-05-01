@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+// RESPONSIBLE FOR TAKING PLAYER INPUTS, AND DOING THE CORRESPONDING ACTIONS OF THE MAIN MENU
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] Button StartBtn;
