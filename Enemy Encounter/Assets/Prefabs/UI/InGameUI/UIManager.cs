@@ -41,14 +41,14 @@ public class UIManager : MonoBehaviour
         LevelManager.onLevelFinished += LevelFinished;
     }
 
-    private void LevelFinished()
+    private void LevelFinished() // GAME FINISHED
     {
         SetCurrentActiveGrp(WinMenu);
         GameplayStatics.SetGamePaused(true);
         uiAudioPlayer.PlayWin();
     }
 
-    internal void SwithToGameplayUI()
+    internal void SwithToGameplayUI() // RESUME THE GAME
     {
         SetCurrentActiveGrp(GameplayControl);
         GameplayStatics.SetGamePaused(false);
@@ -77,13 +77,13 @@ public class UIManager : MonoBehaviour
         SetCanvasGroupEnabled(GameplayControl, enabled);
     }
 
-    public void SwithToPauseMenu()
+    public void SwithToPauseMenu() // PAUSE THE GAME
     {
         SetCurrentActiveGrp(PauseMenu);
         GameplayStatics.SetGamePaused(true);
     }
 
-    internal void SwithToShop()
+    internal void SwithToShop() // OPEN UP THE SHOP
     {
         SetCurrentActiveGrp(Shop);
         GameplayStatics.SetGamePaused(true);
