@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// BTTaskGroup_AttackTarget is a NODE
+
 public class BTTaskGroup_AttackTarget : BTTask_Group
 {
-    float moveAcceptableDistance;
+    float moveAcceptableDistance; // How far should the enemy be from the Player charcater
     float rotationAcceptableRaidus;
-    float attackCooldownDuration;
+    float attackCooldownDuration; // How long the enemy should wait before making the attack again(rate of the attack)
     public BTTaskGroup_AttackTarget(BehaviorTree tree, float moveAcceptableDistance = 2f, float rotationAcceptableRaidus = 10f, float attackCooldownDuration = 0) : base(tree)
     {
         this.moveAcceptableDistance = moveAcceptableDistance;
@@ -30,10 +32,10 @@ public class BTTaskGroup_AttackTarget : BTTask_Group
         BlackboardDecorator attackTargetDecorator = new BlackboardDecorator(tree,
                                                                             attackTargetSeq,
                                                                             "Target",
-                                                                            BlackboardDecorator.RunCondition.KeyExists,
+                                                                            BlackboardDecorator.RunCondition.KeyExists, // I CARE ABOUT THE EXISTANCE OF THE "Target" KEY(which means attackTargetSeq will only work if that key exists)
                                                                             BlackboardDecorator.NotifyRule.RunConditionChange,
-                                                                            BlackboardDecorator.NotifyAbort.both
-                                                                            );
+                                                                            BlackboardDecorator.NotifyAbort.both // Abort 
+                                                                            ); // This sets a condition for the attacking
 
         Root = attackTargetDecorator;
     }

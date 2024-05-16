@@ -8,7 +8,7 @@ public class ChomperBehavior : BehaviorTree
     {
         Selector RootSelector = new Selector();
 
-        RootSelector.AddChild(new BTTaskGroup_AttackTarget(this, 2, 10f));
+        RootSelector.AddChild(new BTTaskGroup_AttackTarget(this, 2, 10f)); // 2 is the rotationAcceptableRaidus, 10 is the attackCooldownDuration
 
         RootSelector.AddChild(new BTTaskGroup_MoveToLastSeenLoc(this, 3));
 

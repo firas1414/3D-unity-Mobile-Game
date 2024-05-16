@@ -6,7 +6,7 @@ public class Selector : Compositor
 {
     protected override NodeResult Update()
     {
-        NodeResult result = GetCurrentChild().UpdateNode();
+        NodeResult result = GetCurrentChild().UpdateNode(); // Start the first child
         if(result == NodeResult.Success)
         {
             return NodeResult.Success;

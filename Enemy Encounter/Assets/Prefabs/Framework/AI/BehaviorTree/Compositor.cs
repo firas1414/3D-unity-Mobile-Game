@@ -4,22 +4,22 @@ using UnityEngine;
 
 public abstract class Compositor : BTNode
 {
-    LinkedList<BTNode> children = new LinkedList<BTNode>();
-    LinkedListNode<BTNode> currentChild = null;
+    LinkedList<BTNode> children = new LinkedList<BTNode>(); // The compositor childrens
+    LinkedListNode<BTNode> currentChild = null; // a reference to the current child node being processed.
 
-    public void AddChild(BTNode newChild)
+    public void AddChild(BTNode newChild) // Add a child to the children list
     {
         children.AddLast(newChild);
     }
 
     protected override NodeResult Execute()
     {
-        if(children.Count == 0)
+        if(children.Count == 0) // This is in case we didnt add any child to the children list(which is not gonna happen)
         {
             return NodeResult.Success;
         }
 
-        currentChild = children.First;
+        currentChild = children.First; // at the first execution, the currentchild will the first child in the children list
         return NodeResult.Inprogress;
     }
 

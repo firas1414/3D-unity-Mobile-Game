@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Decorator : BTNode
 {
-    BTNode child;
+    BTNode child; // This is the node that we're applying a decorator to
 
     protected BTNode GetChild()
     {

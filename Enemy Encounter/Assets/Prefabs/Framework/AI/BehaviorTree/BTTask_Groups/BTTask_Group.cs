@@ -20,7 +20,7 @@ public abstract class BTTask_Group : BTNode
 
     protected override NodeResult Update()
     {
-        return Root.UpdateNode();
+        return Root.UpdateNode(); // Start the group node 
     }
 
     protected override void End()

@@ -50,7 +50,7 @@ public class BlackboardDecorator : Decorator
     protected override NodeResult Execute()
     {
         Blackboard blackboard = tree.Blackboard;
-        if (blackboard == null)
+        if (blackboard == null) // This is just in case
             return NodeResult.Failure;
 
         blackboard.onBlackboardValueChange -= CheckNotify;
@@ -66,30 +66,32 @@ public class BlackboardDecorator : Decorator
         }
     }
 
+
+    // CHECK WETHER THE RunCondition IS MET OR NOT
     private bool CheckRunCondition()
     {
-        bool exists = tree.Blackboard.GetBlackboardData(key, out value);
+        bool exists = tree.Blackboard.GetBlackboardData(key, out value); // IF KEY EXISTS -> FALSE, OTHERWISE TRUE
         switch(runCondition)
         {
-            case RunCondition.KeyExists:
+            case RunCondition.KeyExists: // THE exist variable already have the bool for the key existance soo if all we have to do is return exist
                 return exists;
-            case RunCondition.keyNotExists:
+            case RunCondition.keyNotExists: // HERE, WE HAVE TO RETURN THE OPPOSITE OF THE exists RESULT
                 return !exists;
         }
 
         return false;
     }
 
-    private void CheckNotify(string key, object val)
+    private void CheckNotify(string key, object val) // THIS WILL BE EXECUTED EACH TIME A CHANGE HAPPENS TO THE BLACKBOARDDATA
     {
-        if (this.key != key) return;
+        if (this.key != key) return; // CHECK IF THE CHANGE MATTERS TO US OR NOT
 
         if(notifyRule == NotifyRule.RunConditionChange)
         {
-            bool prevExists = value != null;
-            bool currentExists = val != null;
+            bool prevExists = value != null; // IF RETURN TRUE -> KEY EXISTS, IF FALSE -> KEY DOES NOT EXISTS
+            bool currentExists = val != null; // IF RETURN TRUE -> KEY EXISTS, IF FALSE -> KEY DOES NOT EXISTS
 
-            if(prevExists != currentExists)
+            if(prevExists != currentExists) // IF THERE IS A DIFFERENCE IN THE EXSISTANCE STATE, NOTIFY()
             {
                 Notify();
             }

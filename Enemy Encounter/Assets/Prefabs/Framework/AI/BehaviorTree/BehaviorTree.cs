@@ -37,7 +37,7 @@ public abstract class BehaviorTree : MonoBehaviour
         
     }
 
-    protected abstract void ConstructTree(out BTNode rootNode);
+    protected abstract void ConstructTree(out BTNode rootNode); // The enemy behavior(for example ChomperBehavior) class will override this to build the enemy's behavior tree
 
     // Update is called once per frame
     void Update()
