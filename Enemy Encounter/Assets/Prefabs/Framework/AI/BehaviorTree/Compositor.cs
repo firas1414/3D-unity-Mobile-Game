@@ -72,7 +72,7 @@ public abstract class Compositor : BTNode
         {
             if(children.Count!=0)
             {
-                return children.First.Value.Get();
+                return children.First.Value.Get(); // WERE DOING A GET, BECAUSE THIS CHILD COULD ALSO BE A COMPOSITOR
             }
             else
             {
