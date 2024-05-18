@@ -66,7 +66,7 @@ public abstract class Compositor : BTNode
         }
     }
 
-    public override BTNode Get()
+    public override BTNode Get() // THIS FUNCTION RETURN THE CURRENT-ACTIVE CHILD IN THE CHILDRENS LIST
     {
         if(currentChild == null)
         {
