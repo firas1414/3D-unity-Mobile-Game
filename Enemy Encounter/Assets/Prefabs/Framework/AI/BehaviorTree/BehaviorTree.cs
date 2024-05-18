@@ -48,12 +48,12 @@ public abstract class BehaviorTree : MonoBehaviour
         }
     }
 
-    public void AbortLowerThan(int priority)
+    public void AbortLowerThan(int priority) //  ABORTS NODES THAT HAS LESS PRIORITY THAN THE GIVEN PRIORITY
     {
         BTNode currentNode = Root.Get();
-        if(currentNode.GetPriority() > priority)
+        if(currentNode.GetPriority() > priority) // IF NOW WERE IN PATROLLING AND IF IT IS LESS IMPORTANT THAN priority NODE(MADE THE OPPOSITE BECAUSE LOWER PRIORITY MEANS HIGHER PRIORITY AND VISE VERSA)
         {
-            Root.Abort();
+            Root.Abort(); // THEN ABORT EVERYTHING, WHICH MEANS RESTART THE TREE
         }
     }
 
