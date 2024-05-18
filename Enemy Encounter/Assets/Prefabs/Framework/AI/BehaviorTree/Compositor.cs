@@ -66,7 +66,7 @@ public abstract class Compositor : BTNode
         }
     }
 
-    public override BTNode Get() // THIS FUNCTION RETURN THE CURRENT-ACTIVE CHILD IN THE CHILDRENS LIST
+    public override BTNode Get() // THIS FUNCTION RETURN THE CURRENT-ACTIVE CHILD IN THE CHILDRENS LIST - // RECURSIVE FUNCTION UNTIL WE REACH THE LAST NODE
     {
         if(currentChild == null)
         {
@@ -80,6 +80,6 @@ public abstract class Compositor : BTNode
             }
         }
 
-        return currentChild.Value.Get();
+        return currentChild.Value.Get(); 
     }
 }
