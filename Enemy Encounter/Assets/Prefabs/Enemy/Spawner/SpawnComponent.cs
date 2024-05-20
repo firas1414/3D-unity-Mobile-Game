@@ -45,7 +45,7 @@ public class SpawnComponent : MonoBehaviour
         ISpawnInterface newSpawnInterface = newSpawn.GetComponent<ISpawnInterface>();
         if(newSpawnInterface!=null)
         {
-            newSpawnInterface.SpawnedBy(gameObject);
+            newSpawnInterface.SpawnedBy(gameObject); // CALLS THE SawnedBy function implemented by the Enemy Class
         }
     }
 }
