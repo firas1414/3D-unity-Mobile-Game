@@ -38,7 +38,7 @@ public class SpawnComponent : MonoBehaviour
 
     }
 
-    public void SpawnImpl()
+    public void SpawnImpl() // THIS IS TRIGGERED FROM THE ANIMATOR, WHEN THE SPAWN VARIABLE IS SET TO TRUE
     {
         int randomPick = Random.Range(0, objectsToSpawn.Length);
         GameObject newSpawn = Instantiate(objectsToSpawn[randomPick], spawnTransform.position, spawnTransform.rotation);
