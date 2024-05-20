@@ -74,7 +74,7 @@ public class PerceptionComponent : MonoBehaviour
 
     internal void AssignPercievedStimui(PerceptionStimuli targetStimuli)
     {
-        if(senses.Length != 0)
+        if(senses.Length != 0) // THE ENEMY HAS AT LEAST ONE SENSE
         {
             senses[0].AssignPerceivedStimuli(targetStimuli);
         }
