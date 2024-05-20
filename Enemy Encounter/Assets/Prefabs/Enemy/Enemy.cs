@@ -137,7 +137,7 @@ public abstract class Enemy : MonoBehaviour, IBehaviorTreeInterface, ITeamInterf
         if(spawnerBehaviorTree!=null && spawnerBehaviorTree.Blackboard.GetBlackboardData<GameObject>("Target", out GameObject spawnerTarget)) // IF THERE IS A TARGET, spawnerTarget will be the player object
         {
             PerceptionStimuli targetStimuli = spawnerTarget.GetComponent<PerceptionStimuli>(); // GET THE PLAYER'S PerceptionStimuli
-            if(perceptionComp && targetStimuli)
+            if(perceptionComp && targetStimuli) // IF THERE IS A TARGET & THAT TARGET(player) HAS A PERCEPTION STIMULI Component(which means he is registrated stimuli)
             {
                 perceptionComp.AssignPercievedStimui(targetStimuli);
             }
