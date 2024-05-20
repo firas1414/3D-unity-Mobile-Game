@@ -13,7 +13,7 @@ public class BTTask_Spawn : BTNode
     }
     protected override NodeResult Execute()
     {
-        if(spawnComponent == null || !spawnComponent.StartSpawn()) // THIS PROBABLY WILL NEVER HAPPEN, BUT WERE CHECKING JUST IN CASE
+        if(spawnComponent == null || !spawnComponent.StartSpawn()) // THIS PROBABLY WILL NEVER HAPPEN, BUT WERE CHECKING JUST IN CASE, WE HERE ACTIVATED THE START SPAWN FUNCTION
         {
             return NodeResult.Failure;
         }
