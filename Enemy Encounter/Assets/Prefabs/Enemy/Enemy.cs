@@ -98,7 +98,7 @@ public abstract class Enemy : MonoBehaviour, IBehaviorTreeInterface, ITeamInterf
 
     private void CalculateSpeed()
     {
-        if (movementComponent == null) return;
+        if (movementComponent == null) return; // THIS MAKES SURE THAT THIS FUNCTION ONLY WORKS WITH CHOMPER AND SPITTER BECAUSE THE SPAWNER DOESENT A MOVEMENT MECHANISM? ITS FIXED
 
         Vector3 posDelta = transform.position - prevPos;
         float speed = posDelta.magnitude / Time.deltaTime; // .magnitude gives us the distance moved(length of the vector), Time.deltaTime is the time passed, so distance/time = speed
