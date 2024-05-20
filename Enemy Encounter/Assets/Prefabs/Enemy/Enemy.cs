@@ -131,7 +131,7 @@ public abstract class Enemy : MonoBehaviour, IBehaviorTreeInterface, ITeamInterf
         //override in child
     }
 
-    public void SpawnedBy(GameObject spawnerGameobject)
+    public void SpawnedBy(GameObject spawnerGameobject) // CALLED WHEN THIS ENEMY IS SPAWNED BY A SPAWNER
     {
         BehaviorTree spawnerBehaviorTree = spawnerGameobject.GetComponent<BehaviorTree>();
         if(spawnerBehaviorTree!=null && spawnerBehaviorTree.Blackboard.GetBlackboardData<GameObject>("Target", out GameObject spawnerTarget))
