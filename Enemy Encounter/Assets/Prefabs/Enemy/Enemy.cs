@@ -134,9 +134,9 @@ public abstract class Enemy : MonoBehaviour, IBehaviorTreeInterface, ITeamInterf
     public void SpawnedBy(GameObject spawnerGameobject) // CALLED WHEN THIS ENEMY IS SPAWNED BY A SPAWNER
     {
         BehaviorTree spawnerBehaviorTree = spawnerGameobject.GetComponent<BehaviorTree>();
-        if(spawnerBehaviorTree!=null && spawnerBehaviorTree.Blackboard.GetBlackboardData<GameObject>("Target", out GameObject spawnerTarget))
+        if(spawnerBehaviorTree!=null && spawnerBehaviorTree.Blackboard.GetBlackboardData<GameObject>("Target", out GameObject spawnerTarget)) // IF THERE IS A TARGET, spawnerTarget will be the player object
         {
-            PerceptionStimuli targetStimuli = spawnerTarget.GetComponent<PerceptionStimuli>();
+            PerceptionStimuli targetStimuli = spawnerTarget.GetComponent<PerceptionStimuli>(); // GET THE PLAYER'S PerceptionStimuli
             if(perceptionComp && targetStimuli)
             {
                 perceptionComp.AssignPercievedStimui(targetStimuli);
