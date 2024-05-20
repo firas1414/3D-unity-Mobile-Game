@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// THIS CLASS IS A LEAF NODE, 
 public class BTTask_Spawn : BTNode
 {
     SpawnComponent spawnComponent;
@@ -11,7 +13,7 @@ public class BTTask_Spawn : BTNode
     }
     protected override NodeResult Execute()
     {
-        if(spawnComponent == null || !spawnComponent.StartSpawn())
+        if(spawnComponent == null || !spawnComponent.StartSpawn()) // THIS PROBABLY WILL NEVER HAPPEN, BUT WERE CHECKING JUST IN CASE
         {
             return NodeResult.Failure;
         }
