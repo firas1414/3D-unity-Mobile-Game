@@ -98,7 +98,7 @@ public class Player : MonoBehaviour, ITeamInterface
         }
     }
 
-    public void SwitchWeapon() // THIS IS EXECUTED AFTER THE SWITCHING ANIMATON IS FINISHED, THIS FUNCTION ACTUALLY SWITCHES THE WEAPON
+    public void SwitchWeapon() // THIS IS EXECUTED AFTER THE SWITCHING ANIMATON IS FINISHED, THIS FUNCTION ACTUALLY SWITCHES THE WEAPON, IT IS EXECUTED USING THE ANIMATION EVENT
     {
         inventoryComponent.NextWeapon();
     }
@@ -142,7 +142,7 @@ public class Player : MonoBehaviour, ITeamInterface
     {
         Vector3 MoveDir = StickInputToWorldDir(moveInput);
 
-        characterController.Move(MoveDir * Time.deltaTime * moveSpeed);
+        characterController.Move(MoveDir * Time.deltaTime * moveSpeed); // MOVE THE PLAYER
 
         UpdateAim(MoveDir);
 
