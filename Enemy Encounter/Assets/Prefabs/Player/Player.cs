@@ -90,7 +90,7 @@ public class Player : MonoBehaviour, ITeamInterface
             inventoryComponent.GetActiveWeapon().Attack();
         }
     }
-    void StartSwichWeapon()
+    void StartSwichWeapon() // START THE SWITCHING ANIMATION, EXECUTED WHEN THE PLAYER MAKES A TAP ON THE AIMSTICK
     {
         if(inventoryComponent.HasWeapon())
         {
@@ -98,7 +98,7 @@ public class Player : MonoBehaviour, ITeamInterface
         }
     }
 
-    public void SwitchWeapon()
+    public void SwitchWeapon() // THIS IS EXECUTED AFTER THE SWITCHING ANIMATON IS FINISHED, THIS FUNCTION ACTUALLY SWITCHES THE WEAPON
     {
         inventoryComponent.NextWeapon();
     }

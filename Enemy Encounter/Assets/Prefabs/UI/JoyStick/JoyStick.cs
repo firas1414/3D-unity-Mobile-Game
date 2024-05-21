@@ -5,9 +5,9 @@ using UnityEngine.EventSystems;
 
 public class JoyStick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
-    [SerializeField] RectTransform ThumbStickTrans;
-    [SerializeField] RectTransform BackgroundTrans;
-    [SerializeField] RectTransform CenterTrans;
+    [SerializeField] RectTransform ThumbStickTrans; // THIS REPRESENTS THE STICK
+    [SerializeField] RectTransform BackgroundTrans; // THIS IS THE BACKRGOUND
+    [SerializeField] RectTransform CenterTrans; // THIS IS THE CENTER POSITION WHERE THE STICK IS PLACED BY DEFAULT
 
     public delegate void OnStickInputValueUpdated(Vector2 inputVal);
     public delegate void OnStickTaped();
@@ -22,19 +22,20 @@ public class JoyStick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
         Vector2 TouchPos = eventData.position;
         Vector2 centerPos = BackgroundTrans.position;
 
-        Vector2 localOffset = Vector2.ClampMagnitude(TouchPos - centerPos, BackgroundTrans.sizeDelta.x/2);
+        Vector2 localOffset = Vector2.ClampMagnitude(TouchPos - centerPos, BackgroundTrans.sizeDelta.x/2); // Sets tha max of that difference to not pass the cercles borders
         
         Vector2 inputVal = localOffset / (BackgroundTrans.sizeDelta.x / 2);
 
-        ThumbStickTrans.position = centerPos + localOffset;
+        ThumbStickTrans.position = centerPos + localOffset; // MOVES THE STICK'S POSITION
         onStickValueUpdated?.Invoke(inputVal);
         bWasDragging = true;
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        BackgroundTrans.position = eventData.position;
+        BackgroundTrans.position = eventData.position; 
         ThumbStickTrans.position = eventData.position;
+        // THESE TWO LINES SETS THE WHOLE BLOCK POSITION TO THE PLAYER FINGER'S POSITION
         bWasDragging = false;
     }
 
