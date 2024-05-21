@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public abstract class SenseComp : MonoBehaviour
 {
     [SerializeField] float forgettingTime = 3f;
-    static List<PerceptionStimuli> registeredStimulis = new List<PerceptionStimuli>();
-    List<PerceptionStimuli> PerceivableStimulis = new List<PerceptionStimuli> ();
+    static List<PerceptionStimuli> registeredStimulis = new List<PerceptionStimuli>(); // THIS LIST STORES ANY REGISTERED STIMULIS (which is in our case the player)
+    List<PerceptionStimuli> PerceivableStimulis = new List<PerceptionStimuli> (); // STORES ALL THE CURRENT PERCEIVABLE STIMULIS
 
-    Dictionary<PerceptionStimuli, Coroutine> ForgettingRoutines = new Dictionary<PerceptionStimuli, Coroutine>();
+    Dictionary<PerceptionStimuli, Coroutine> ForgettingRoutines = new Dictionary<PerceptionStimuli, Coroutine>(); // EACH STIMULI HAS A COROUTINE
 
     public delegate void OnPerceptionUpdated(PerceptionStimuli stimuli, bool succsessfulySensed);
 
@@ -31,23 +32,24 @@ public abstract class SenseComp : MonoBehaviour
     protected abstract bool IsStimuliSensable(PerceptionStimuli stimuli);
 
     // Update is called once per frame
-    void Update()
+    void Update() // THIS WILL EXECUTED ONCE PER FRAME, so either 60 times per second or 30 times per second(depending on the fps)
     {
-        foreach(var stimuli in registeredStimulis)
+        foreach(var stimuli in registeredStimulis) // IN OUR CASE WE ONLY HAVE ONE STIMULI, but we just want to make this flexible
         {
-            if(IsStimuliSensable(stimuli))
+            if(IsStimuliSensable(stimuli)) // IF THE PLAYER IS SENSED BY THIS SENSE
             {
-                if(!PerceivableStimulis.Contains(stimuli))
+                if(!PerceivableStimulis.Contains(stimuli)) // check if we already sensing him
                 {
-                    PerceivableStimulis.Add(stimuli);
-                    if(ForgettingRoutines.TryGetValue(stimuli, out Coroutine routine))
+                    PerceivableStimulis.Add(stimuli); 
+                    if(ForgettingRoutines.TryGetValue(stimuli, out Coroutine routine)) // IF THERE IS A COUROTINE RUNNING
                     {
-                        StopCoroutine(routine);
-                        ForgettingRoutines.Remove(stimuli);
+                        StopCoroutine(routine); // STOP IT
+                        ForgettingRoutines.Remove(stimuli); // REMOVE STIMULI FROM FORGETTING ROUTINES BECAUSE WE ARE NOW SENSING HIM
+                        // WE DIDNT INVOKE A FUNCTION BECAUSE THE STIMULI IS ALREADY SET TO TRUE
                     }
                     else
                     {
-                        onPerceptionUpdated?.Invoke(stimuli, true);
+                        onPerceptionUpdated?.Invoke(stimuli, true); // IF WE SPOTTED THE PLAYER, TRIGGER AN EVENT
                     }
                 }
             }
@@ -67,7 +69,7 @@ public abstract class SenseComp : MonoBehaviour
         PerceivableStimulis.Add(targetStimuli);
         onPerceptionUpdated?.Invoke(targetStimuli, true);
 
-        //TODO: WHAT IF WE ARE FORETTING IT.
+
         if(ForgettingRoutines.TryGetValue(targetStimuli, out Coroutine forgetCoroutine))
         {
             StopCoroutine(forgetCoroutine);

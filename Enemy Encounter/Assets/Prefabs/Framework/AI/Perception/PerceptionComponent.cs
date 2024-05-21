@@ -5,19 +5,19 @@ using UnityEngine;
 
 public class PerceptionComponent : MonoBehaviour
 {
-    [SerializeField] SenseComp[] senses;
+    [SerializeField] SenseComp[] senses; // STORES ALL THE SENSES
     [Header("Audio")]
     [SerializeField] AudioClip DetectionAudio;
     [SerializeField] float volume = 1f;
-    LinkedList<PerceptionStimuli> currentlyPerceivedStimulis = new LinkedList<PerceptionStimuli>();
+    LinkedList<PerceptionStimuli> currentlyPerceivedStimulis = new LinkedList<PerceptionStimuli>(); // STORES ALL THE CURRENT PERCEIVABLE STIMULI
 
-    PerceptionStimuli targetStimuli;
+    PerceptionStimuli targetStimuli; // REPRESENTES THE FUTURE PERCEIVALE TARGET(in our case, the player)
 
     public delegate void OnPerceptionTagetChanged(GameObject target, bool sensed);
 
     public event OnPerceptionTagetChanged onPerceptionTargetChanged;
 
-    private void Awake()
+    private void Awake() // THIS EXECUTED AUTOMATICALLY ONLY ONCE, WHEN THE GAME STARTS, its almost like the Start function
     {
         foreach (SenseComp sense in senses)
         {
@@ -31,14 +31,14 @@ public class PerceptionComponent : MonoBehaviour
         
     }
 
-    private void SenseUpdated(PerceptionStimuli stimuli, bool succsessfulySensed)
+    private void SenseUpdated(PerceptionStimuli stimuli, bool succsessfulySensed) // THIS METHOD IS CALLED EACH TIME A CERTAIN SENSE GETS UPDATED
     {
         var nodeFound = currentlyPerceivedStimulis.Find(stimuli);
         if (succsessfulySensed)
         {
             if (nodeFound != null)
             {
-                currentlyPerceivedStimulis.AddAfter(nodeFound, stimuli);
+                currentlyPerceivedStimulis.AddAfter(nodeFound, stimuli); // MAKES SURE TO ADD THAT NODE EXACTLY NEXT TO THE STIMULI(for example if there is a plyer 1, add player1 next to player1 and not next to player 2)
             }
             else
             {
